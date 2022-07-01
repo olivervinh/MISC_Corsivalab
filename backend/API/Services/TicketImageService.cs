@@ -4,7 +4,11 @@ using API.Services.Base;
 
 namespace API.Services
 {
-    public class TicketImageService : BaseService<TicketImage>
+    public interface ITicketImageService : IBaseService<TicketImage>
+    {
+
+    }
+    public class TicketImageService : BaseService<TicketImage>,ITicketImageService
     {
         public TicketImageService(AppDbContext context) : base(context)
         {

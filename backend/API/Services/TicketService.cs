@@ -4,7 +4,8 @@ using API.Services.Base;
 
 namespace API.Services
 {
-    public class TicketService : BaseService<Ticket>
+    public interface ITicketService : IBaseService<Ticket> { }
+    public class TicketService : BaseService<Ticket>, ITicketService
     {
         public TicketService(AppDbContext context) : base(context)
         {

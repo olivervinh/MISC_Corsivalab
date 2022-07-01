@@ -4,7 +4,11 @@ using API.Services.Base;
 
 namespace API.Services
 {
-    public class ProjectService : BaseService<Project>
+    public interface IProjectService : IBaseService<Project>
+    {
+
+    }
+    public class ProjectService : BaseService<Project>,IProjectService
     {
         public ProjectService(AppDbContext context) : base(context)
         {

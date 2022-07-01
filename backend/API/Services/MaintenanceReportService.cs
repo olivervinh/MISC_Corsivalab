@@ -4,7 +4,11 @@ using API.Services.Base;
 
 namespace API.Services
 {
-    public class MaintenanceReportService : BaseService<MaintenanceReport>
+    public interface IMaintenanceReportService: IBaseService<MaintenanceReport>
+    {
+
+    }
+    public class MaintenanceReportService : BaseService<MaintenanceReport>,IMaintenanceReportService
     {
         public MaintenanceReportService(AppDbContext context) : base(context)
         {

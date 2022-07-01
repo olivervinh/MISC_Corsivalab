@@ -4,7 +4,8 @@ using API.Services.Base;
 
 namespace API.Services
 {
-    public class TechnologyUsedService : BaseService<TechnologyUsed>
+    public interface ITechnologyUsedService : IBaseService<TechnologyUsed> { }
+    public class TechnologyUsedService : BaseService<TechnologyUsed>,ITechnologyUsedService
     {
         public TechnologyUsedService(AppDbContext context) : base(context)
         {

@@ -4,7 +4,8 @@ using API.Services.Base;
 
 namespace API.Services
 {
-    public class StaffCredentialRequestService : BaseService<StaffCredentialRequest>
+    public interface IStaffCredentialRequestService : IBaseService<StaffCredentialRequest> { }
+    public class StaffCredentialRequestService : BaseService<StaffCredentialRequest>,IStaffCredentialRequestService
     {
         public StaffCredentialRequestService(AppDbContext context) : base(context)
         {
