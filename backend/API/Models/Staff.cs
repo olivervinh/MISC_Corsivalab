@@ -35,4 +35,18 @@ namespace API.Models
         public string ResponseName { get; set; }
         public virtual ICollection<StaffObject> ResponseObjects { get; set; }
     }
+    public class TokenResponse
+    {
+        public string Error;
+        public string Access_token;
+        public string Toekn_type;
+        public string Expires_in;
+    }
+
+    public class AuthResponse
+    {
+        public string ResponseCode;
+        public string ResponseName;
+        public string ResponseObject;
+    }
 }
