@@ -1,5 +1,6 @@
 ﻿using API.Data;
 using API.Dtos;
+using API.Helpers;
 using API.Models;
 using API.Models.Base;
 using API.Services.Base;
@@ -37,6 +38,18 @@ namespace API.Services
         }
         public async Task<ResponseClass> LoginAsync(LoginDto dto)
         {
+            if(ValidateHelper.ValidateWrongStringLength10(dto.Username)
+                &&
+                ValidateHelper.ValidateWrongStringLength10(dto.Password))
+            {
+                return new ResponseClass()
+                {
+                    responseCode = 401,
+                    responseMessage = "Fail to validate",
+                    responseName = "Fail validate",
+                    responseObject = null,
+                };
+            }
             TokenResponse tResponse = await GetToken(dto.Username.Trim(), dto.Password.Trim());
             AuthResponse aResponse = await GetAuth(tResponse.Access_token);
             switch (aResponse.ResponseCode)

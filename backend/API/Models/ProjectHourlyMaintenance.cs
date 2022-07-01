@@ -9,9 +9,9 @@ namespace API.Models
         public double Cost { get; set; }
         public DateTime PurchasedDate { get; set; }
         public double HoursSpent { get; set; }
-        [ForeignKey(nameof(FkProjectId))]
+        //[ForeignKey(nameof(FkProjectId))]
         public int FkProjectId { get; set; }
-        public virtual Project Project { get; set; }
-        public virtual ICollection<ProjectHourlyMaintenanceRecord> ProjectHourlyMaintenanceRecords { get; set; }
+        //public virtual Project Project { get; set; }
+        //public virtual ICollection<ProjectHourlyMaintenanceRecord> ProjectHourlyMaintenanceRecords { get; set; }
     }
 }

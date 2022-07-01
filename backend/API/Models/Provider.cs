@@ -1,6 +1,8 @@
-﻿namespace API.Models
+﻿using API.Models.Base;
+
+namespace API.Models
 {
-    public class Provider
+    public class Provider:EntityBase
     {
         public string Name { get; set; }
     }

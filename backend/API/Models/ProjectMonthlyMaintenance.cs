@@ -9,8 +9,8 @@ namespace API.Models
         public DateTime EndDate { get; set; }
         public int Amount { get; set; }
         public string Per { get; set; }
-        [ForeignKey(nameof(FkProjectId))]
+        //[ForeignKey(nameof(FkProjectId))]
         public int FkProjectId { get; set; }
-        public virtual Project Project { get; set; }
+        //public virtual Project Project { get; set; }
     }
 }

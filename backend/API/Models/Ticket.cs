@@ -12,17 +12,17 @@ namespace API.Models
         public TicketPriority Priority { get; set; }
         public int StaffAssigned { get; set; }
         public int Status { get; set; }
-        [ForeignKey(nameof(FkProjectId))]
+        //[ForeignKey(nameof(FkProjectId))]
         public int FkProjectId { get; set; }
-        [ForeignKey(nameof(FkCustomerId))]
+        //[ForeignKey(nameof(FkCustomerId))]
         public int FkCustomerId { get; set; }
-        [ForeignKey(nameof(FkStaffId))]
+        //[ForeignKey(nameof(FkStaffId))]
         public int FkStaffId { get; set; }
-        public virtual Customer Customer { get; set; }
-        public virtual Project Project { get; set; }
-        public virtual Staff Staff { get; set; }
+        //public virtual Customer Customer { get; set; }
+        //public virtual Project Project { get; set; }
+        //public virtual Staff Staff { get; set; }
         public DateTime CreatedAt { get; set; }
-        public virtual ICollection<TicketImage> TicketImages { get; set; }
-        public virtual ICollection<TicketReply> TicketReplies { get; set; }
+        //public virtual ICollection<TicketImage> TicketImages { get; set; }
+        //public virtual ICollection<TicketReply> TicketReplies { get; set; }
     }
 }

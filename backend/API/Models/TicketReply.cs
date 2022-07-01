@@ -12,8 +12,8 @@ namespace API.Models
         public string Title { get; set; }
         public DateTime CreatedAt { get; set; }
         public bool Approve { get; set; }
-        [ForeignKey(nameof(FkTicketId))]
+        //[ForeignKey(nameof(FkTicketId))]
         public int FkTicketId { get; set; }
-        public virtual Ticket Ticket { get; set; }
+        //public virtual Ticket Ticket { get; set; }
     }
 }

@@ -13,11 +13,11 @@ namespace API.Models
         public DateTime LastLogin { get; set; }
         public string Token { get; set; }
         public int NewId { get; set; }
-        [ForeignKey(nameof(FkIndustryId))]
+        //[ForeignKey(nameof(FkIndustryId))]
         public int FkIndustryId { get; set; }
-        public virtual Industry Industry { get; set; }
-        public virtual ICollection<MaintenanceMontly> MaintenanceMontlies { get; set; }
-        public virtual ICollection<Project> Projects { get; set; }
-        public virtual ICollection<Ticket> Tickets { get; set; }
+        //public virtual Industry Industry { get; set; }
+        //public virtual ICollection<MaintenanceMontly> MaintenanceMontlies { get; set; }
+        //public virtual ICollection<Project> Projects { get; set; }
+        //public virtual ICollection<Ticket> Tickets { get; set; }
     }
 }

@@ -17,9 +17,9 @@ namespace API.Controllers
             _staffService = staffService;
         }
         [HttpPost]
-        public async Task<ResponseClass> LoginAsync([FromBody]LoginDto dto)
+        public async Task<IActionResult> LoginAsync([FromBody]LoginDto dto)
         {
-            return await _staffService.LoginAsync(dto);
+            return Ok(await _staffService.LoginAsync(dto));
         }
     }
 }

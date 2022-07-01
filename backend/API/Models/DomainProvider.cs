@@ -5,6 +5,6 @@ namespace API.Models
     public class DomainProvider:EntityBase
     {
         public string Name { get; set; }
-        public virtual ICollection<Project> Projects { get; set; }
+        //public virtual ICollection<Project> Projects { get; set; }
     }
 }

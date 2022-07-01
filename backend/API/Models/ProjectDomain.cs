@@ -10,8 +10,8 @@ namespace API.Models
         public string Cost { get; set; }
         public int Provider { get; set; }
         public int Owner { get; set; }
-        [ForeignKey(nameof(FkProjectId))]
+        //[ForeignKey(nameof(FkProjectId))]
         public int FkProjectId { get; set; }
-        public virtual Project Project { get; set; }
+        //public virtual Project Project { get; set; }
     }
 }

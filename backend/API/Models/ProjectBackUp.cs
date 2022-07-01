@@ -7,8 +7,8 @@ namespace API.Models
     {
         public DateTime UpdatedAt { get; set; }
         public string Link { get; set; }
-        [ForeignKey(nameof(FkProjectId))]
+        //[ForeignKey(nameof(FkProjectId))]
         public int FkProjectId { get; set; }
-        public virtual Project Project { get; set; }
+        //public virtual Project Project { get; set; }
     }
 }

@@ -7,8 +7,8 @@ namespace API.Models
     {
         public string ServiceHourLeft { get; set; }
         public DateTime ExpiryTime { get; set; }
-        [ForeignKey(nameof(FkProjectId))]
+        //[ForeignKey(nameof(FkProjectId))]
         public int FkProjectId { get; set; }
-        public virtual Project Project { get; set; }
+        //public virtual Project Project { get; set; }
     }
 }

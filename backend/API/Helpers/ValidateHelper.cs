@@ -4,6 +4,12 @@ namespace API.Helpers
 {
     public class ValidateHelper
     {
+        public static bool ValidateWrongStringLength10(string s)
+        {
+            if(s.Count()>10)
+                return true;
+            return false;  
+        }
         public static bool ValidateWrongNumber(string s)
         {
             if (!Regex.Match(s, @"^[0-9][0-9,\.]+$").Success)

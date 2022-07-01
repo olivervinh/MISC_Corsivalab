@@ -10,11 +10,11 @@ namespace API.Models
         public DateTime CreatedAt { get; set; }
         public DateTime LastLogin { get; set; }
         public string Token { get; set; }
-        public virtual ICollection<MaintenanceLog> MaintenanceLogs { get; set; }
-        public virtual ICollection<MaintenanceReport> MaintenanceReports { get; set; }
-        public virtual ICollection<ProjectCredentialLog> ProjectCredentialLogs { get; set; }
-        public virtual ICollection<StaffCredentialRequest> StaffCredentialRequests { get; set; }
-        public virtual ICollection<Ticket> Tickets { get; set; }
+        //public virtual ICollection<MaintenanceLog> MaintenanceLogs { get; set; }
+        //public virtual ICollection<MaintenanceReport> MaintenanceReports { get; set; }
+        //public virtual ICollection<ProjectCredentialLog> ProjectCredentialLogs { get; set; }
+        //public virtual ICollection<StaffCredentialRequest> StaffCredentialRequests { get; set; }
+        //public virtual ICollection<Ticket> Tickets { get; set; }
     }
     public class StaffObject : EntityBase
     {

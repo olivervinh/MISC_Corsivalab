@@ -8,11 +8,11 @@ namespace API.Models
         public string Remark { get; set; }
         public DateTime LastUpdate { get; set; }
         public DateTime CreatedAt { get; set; }
-        [ForeignKey(nameof(FkProjectId))]
+        //[ForeignKey(nameof(FkProjectId))]
         public int FkProjectId { get; set; }
-        [ForeignKey(nameof(FkStaffId))]
+        //[ForeignKey(nameof(FkStaffId))]
         public int FkStaffId { get; set; }
-        public virtual Project Project { get; set; }
-        public virtual Staff Staff { get; set; }
+        //public virtual Project Project { get; set; }
+        //public virtual Staff Staff { get; set; }
     }
 }

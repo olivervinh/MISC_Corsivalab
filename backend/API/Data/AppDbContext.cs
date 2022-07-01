@@ -11,6 +11,7 @@ namespace API.Data
         }
         public DbSet<ApiLog> ApiLogs { get; set; }
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<DomainProvider> DomainProviders { get; set; }
         public DbSet<Industry> Industries { get; set; }
         public DbSet<MaintenanceHourly> MaintenanceHourlies { get; set; }
         public DbSet<MaintenanceLog> MaintenanceLogs{ get; set; }
