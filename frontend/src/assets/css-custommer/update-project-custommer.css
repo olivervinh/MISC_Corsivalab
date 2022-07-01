@@ -1,0 +1,10 @@
+﻿.group-random{
+    display:flex;
+}
+.input-random{
+    width:75%;
+}
+.button-random{
+    width:25%;
+}
+

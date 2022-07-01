@@ -19,27 +19,22 @@ namespace API.Services
         public StaffService(AppDbContext context) : base(context)
         {
         }
-
         public async Task<StaffObject> GetAllStaff(string Token)
         {
             return new StaffObject();
         }
-
         public Task<AuthResponse> GetAuth(string access_token)
         {
             throw new NotImplementedException();
         }
-
         public async Task<StaffObject> GetStaffByID(string id, string token)
         {
             return new StaffObject();
         }
-
         public Task<TokenResponse> GetToken(string email, string password)
         {
             throw new NotImplementedException();
         }
-
         public async Task<ResponseClass> LoginAsync(LoginDto dto)
         {
             TokenResponse tResponse = await GetToken(dto.Username.Trim(), dto.Password.Trim());
