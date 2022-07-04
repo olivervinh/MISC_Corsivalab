@@ -4,6 +4,12 @@ using API.Helpers;
 using API.Models;
 using API.Models.Base;
 using API.Services.Base;
+using RestSharp;
+using System.Net.Http.Json;
+using System.Text;
+using System.Text.Json.Serialization;
+using System.Text.Json;
+using Newtonsoft.Json;
 
 namespace API.Services
 {
@@ -17,8 +23,10 @@ namespace API.Services
     }
     public class StaffService : BaseService<Staff>,IStaffService
     {
-        public StaffService(AppDbContext context) : base(context)
+        private readonly IHttpClientFactory _httpClientFactory;
+        public StaffService(AppDbContext context, IHttpClientFactory httpClientFactory) : base(context)
         {
+            _httpClientFactory = httpClientFactory;
         }
         public async Task<StaffObject> GetAllStaff(string Token)
         {
@@ -30,11 +38,49 @@ namespace API.Services
         }
         public async Task<StaffObject> GetStaffByID(string id, string token)
         {
-            return new StaffObject();
+            var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get,
+            "https://toolkit.corsivalab.com/token");
+            httpRequestMessage.Headers.Add("Authorization", "Bearer " + token + "");
+            httpRequestMessage.Headers.Add("Content-Type", "application/json");
+            httpRequestMessage.Headers.Add("Cookie", "ARRAffinity=d96391891af12dbd0803dfc56bab6a4a4e7a9d33e954ae05fd44bc7807ff50f8; ARRAffinitySameSite=d96391891af12dbd0803dfc56bab6a4a4e7a9d33e954ae05fd44bc7807ff50f8");
+            var httpClient = _httpClientFactory.CreateClient();
+            httpRequestMessage.Content = new StringContent(
+                JsonConvert.SerializeObject(new { id = id }),
+                Encoding.UTF8, "application/json");
+            httpClient.Timeout = new TimeSpan(0);
+            var httpResponseMessage = await httpClient.SendAsync(httpRequestMessage);
+            if (httpResponseMessage.IsSuccessStatusCode)
+            {
+                using var contentStream =
+                    await httpResponseMessage.Content.ReadAsStreamAsync();
+                var staffObject = await System.Text.Json.JsonSerializer.DeserializeAsync<StaffObject>(contentStream);
+                staffObject.AccessToken = token;
+                return staffObject;
+            }
+            return null;
         }
         public Task<TokenResponse> GetToken(string email, string password)
         {
-            throw new NotImplementedException();
+            var httpRequestMessage = new HttpRequestMessage(HttpMethod.Get,
+           "https://toolkit.corsivalab.com/token");
+            httpRequestMessage.Headers.Add("Authorization", "Bearer " + token + "");
+            httpRequestMessage.Headers.Add("Content-Type", "application/json");
+            httpRequestMessage.Headers.Add("Cookie", "ARRAffinity=d96391891af12dbd0803dfc56bab6a4a4e7a9d33e954ae05fd44bc7807ff50f8; ARRAffinitySameSite=d96391891af12dbd0803dfc56bab6a4a4e7a9d33e954ae05fd44bc7807ff50f8");
+            var httpClient = _httpClientFactory.CreateClient();
+            httpRequestMessage.Content = new StringContent(
+                JsonConvert.SerializeObject(new { id = id }),
+                Encoding.UTF8, "application/json");
+            httpClient.Timeout = new TimeSpan(0);
+            var httpResponseMessage = await httpClient.SendAsync(httpRequestMessage);
+            if (httpResponseMessage.IsSuccessStatusCode)
+            {
+                using var contentStream =
+                    await httpResponseMessage.Content.ReadAsStreamAsync();
+                var staffObject = await System.Text.Json.JsonSerializer.DeserializeAsync<StaffObject>(contentStream);
+                staffObject.AccessToken = token;
+                return staffObject;
+            }
+            return null;
         }
         public async Task<ResponseClass> LoginAsync(LoginDto dto)
         {

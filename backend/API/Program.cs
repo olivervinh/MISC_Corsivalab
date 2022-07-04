@@ -4,12 +4,14 @@ using API.Services.Base;
 using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
+services.AddHttpClient();
 services.AddControllers();
 services.AddEndpointsApiExplorer();
 services.AddSwaggerGen();
 services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("db")));
-services.AddScoped(typeof(IBaseService<>),typeof(BaseService<>));
-services.AddScoped<ICustomerService,CustomerService>();
+#region Register DI
+services.AddScoped(typeof(IBaseService<>), typeof(BaseService<>));
+services.AddScoped<ICustomerService, CustomerService>();
 services.AddScoped<IEmailSystemService, EmailSystemService>();
 services.AddScoped<IIndustryService, IndustryService>();
 services.AddScoped<IMaintenanceHourlyService, MaintenanceHourlyService>();
@@ -29,6 +31,7 @@ services.AddScoped<ITechnologyUsedService, TechnologyUsedService>();
 services.AddScoped<ITicketImageService, TicketImageService>();
 services.AddScoped<ITicketReplyService, TicketReplyService>();
 services.AddScoped<ITicketService, TicketService>();
+# endregion
 var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
