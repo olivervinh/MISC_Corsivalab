@@ -7,7 +7,6 @@ namespace API.Data
     {
         public AppDbContext(DbContextOptions options):base(options)
         {
-
         }
         public DbSet<ApiLog> ApiLogs { get; set; }
         public DbSet<Customer> Customers { get; set; }

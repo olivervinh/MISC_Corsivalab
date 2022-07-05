@@ -4,9 +4,9 @@ namespace API.Helpers
 {
     public class ValidateHelper
     {
-        public static bool ValidateWrongStringLength10(string s)
+        public static bool ValidateWrongStringLength50(string s)
         {
-            if(s.Count()>10)
+            if(s.Count()>50)
                 return true;
             return false;  
         }

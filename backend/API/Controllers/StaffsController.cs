@@ -16,10 +16,20 @@ namespace API.Controllers
         {
             _staffService = staffService;
         }
-        [HttpPost]
-        public async Task<IActionResult> LoginAsync([FromBody]LoginDto dto)
+        [HttpPost("login")]
+        public async Task<IActionResult> LoginAsync(LoginDto dto)
         {
-            return Ok(await _staffService.LoginAsync(dto));
+            try
+            {
+                var res = await _staffService.LoginAsync(dto);
+                return Ok(res);
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex);
+            }
+           
+            
         }
     }
 }
