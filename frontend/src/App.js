@@ -14,10 +14,9 @@ import NavBar from './components/navbar/navbar';
 import Dashboard from './components/dashboard/dashboard';
 function App() {
   return (
-    <div className='App'>
        <Router>
       <NavBar/>
-          <div className='page-container'>
+          <div className='App'>
               <Routes>
                   <Route path='/login' element={<Login/>}/>
                   <Route path='/admin/dashboard' element={<Dashboard/>}/>
@@ -32,7 +31,6 @@ function App() {
               </Routes>
           </div>
       </Router>
-    </div>
   );
 }
 

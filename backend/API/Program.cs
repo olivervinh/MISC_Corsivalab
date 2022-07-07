@@ -1,4 +1,5 @@
 using API.Data;
+using API.Helpers;
 using API.Services;
 using API.Services.Base;
 using Microsoft.EntityFrameworkCore;
@@ -32,12 +33,17 @@ services.AddScoped<ITicketImageService, TicketImageService>();
 services.AddScoped<ITicketReplyService, TicketReplyService>();
 services.AddScoped<ITicketService, TicketService>();
 # endregion
+services.AddCors();
 var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseCors(options =>
+       options.WithOrigins(ConstantHelper.Fontend_URL)
+       .AllowAnyHeader()
+       .AllowAnyMethod());
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
