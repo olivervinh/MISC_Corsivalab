@@ -2,7 +2,80 @@ import React from 'react'
 
 const Domain = () => {
   return (
-    <div>Domain</div>
+    <div class="m-content">
+    <div class="m-portlet m-portlet--mobile">
+        <div class="m-portlet__head">
+            <div class="m-portlet__head-caption">
+                <div class="m-portlet__head-title">
+                    <h3 class="m-portlet__head-text">Domain Table
+                    </h3>
+                </div>
+            </div>
+            <div class="m-portlet__head-tools">
+                <ul class="m-portlet__nav">
+                    <li class="m-portlet__nav-item"></li>
+                </ul>
+            </div>
+        </div>
+        <div class="m-portlet__body">
+            <div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
+                <div class="row align-items-center">
+                    <div class="col-xl-8 order-2 order-xl-1">
+                        <div class="form-group m-form__group row align-items-center">
+                            <div class="col-md-4">
+                                <div class="m-input-icon m-input-icon--left">
+                                    <input type="text" class="form-control m-input" placeholder="Search..." id="generalSearch"/>
+                                    <span class="m-input-icon__icon m-input-icon__icon--left">
+                                        <span>
+                                            <i class="la la-search"></i>
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                                <table class="m-datatable3" id="html_table" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th width="10%" title="Field #1">ID</th>
+                                            <th title="Field #2">Title</th>
+                                            <th width="15%" title="Field #2">Customer</th>
+                                            <th width="15%" title="Field #2">Maintain By</th>
+                                            <th width="30%" title="Field #2">Domain</th>
+                                            <th width="40%" title="Filed #2">Owner</th>
+                                            <th width="10%" title="Field #2">Expiry</th>
+                                            <th width="10%" title="Field #6">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td></td>
+                                           <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td> </td>
+                                            <td></td>
+                                            <td data-field="Actions" class="m-datatable__cell">
+                                                <span style="overflow: visible; position: relative; width: 110px;">
+                                                    <div class="dropdown ">
+                                                        <a href="#" onclick='lolclick("<% Response.Write(a.Id); %>")' class="btn m-btn m-btn--hover-accent m-btn--icon m-btn--icon-only m-btn--pill" data-toggle="dropdown"><i class="la la-ellipsis-h"></i></a>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item" href="Update-Project.aspx?id=<%=p.Id%>"><i class="la la-leaf"></i>Update Project</a>
+                                                            <a class="dropdown-item" href="View-MaintenanceReport.aspx?id=<%=p.Id%>">View Maintenance Report</a>
+                                                        </div>
+                                                    </div>
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+            <input type="hidden" name="updateId" id="updateId" value="" />
+        </div>
+    </div>
+</div>
   )
 }
 

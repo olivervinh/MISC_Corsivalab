@@ -25,28 +25,28 @@ namespace API.Models
     }
     public class Auth2Response
     {
-        public string ResponseCode { get; set; }
-        public string ResponseName { get; set; }
-        public virtual StaffObject ResponseObject { get; set; }
+        public string responseCode { get; set; }
+        public string responseName { get; set; }
+        public virtual StaffObject responseObject { get; set; }
     }
     public class Auth3Response
     {
-        public string ResponseCode { get; set; }
-        public string ResponseName { get; set; }
-        public virtual ICollection<StaffObject> ResponseObjects { get; set; }
+        public string responseCode { get; set; }
+        public string responseName { get; set; }
+        public virtual ICollection<StaffObject> responseObjects { get; set; }
     }
     public class TokenResponse
     {
-        public string Error;
-        public string Access_token;
-        public string Toekn_type;
-        public string Expires_in;
+        public string error;
+        public string access_token;
+        public string token_type;
+        public string expires_in;
     }
 
     public class AuthResponse
     {
-        public string ResponseCode;
-        public string ResponseName;
-        public string ResponseObject;
+        public string responseCode;
+        public string responseName;
+        public string responseObject;
     }
 }
