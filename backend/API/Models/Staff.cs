@@ -21,7 +21,7 @@ namespace API.Models
         public string Email { get; set; }
         public string AccessToken { get; set; }
         public string Team { get; set; }
-        public virtual ICollection<Auth2Response> Auth2Responses { get; set; }
+        public virtual List<Auth2Response> Auth2Responses { get; set; }
     }
     public class Auth2Response
     {
@@ -33,7 +33,7 @@ namespace API.Models
     {
         public string responseCode { get; set; }
         public string responseName { get; set; }
-        public virtual ICollection<StaffObject> responseObjects { get; set; }
+        public virtual List<StaffObject> responseObjects { get; set; }
     }
     public class TokenResponse
     {
