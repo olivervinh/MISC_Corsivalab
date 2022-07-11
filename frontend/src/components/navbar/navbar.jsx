@@ -2,7 +2,7 @@ import {Link} from "react-router-dom"
 import { useSelector } from "react-redux";
 import "./navbar.css"
 const NavBar = () => {
-    const user = useSelector((state)=>state.auth.login.currentUser)
+    const user = useSelector((state)=>state.auth.login.currentUser)//use selector : react redux là cách để lấy stage : auth
     console.log("user",user)
     return ( 
         <>

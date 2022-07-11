@@ -1,14 +1,22 @@
 ﻿using API.Models.Base;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace API.Models
 {
+    [Table("CLM_Staff")]
     public class Staff : EntityBase
     {
+        [Column(name: "Username", TypeName = "varchar(MAX)")]
         public string Username { get; set; }
+        [Column(name: "Password", TypeName = "nvarchar(MAX)")]
         public string Password { get; set; }
+        [Column(name: "Role", TypeName = "int")]
         public int Role { get; set; }
+        [Column(name: "CreatedAt", TypeName = "datetime2(7)")]
         public DateTime CreatedAt { get; set; }
+        [Column(name: "LastLogin", TypeName = "datetime2(7)")]
         public DateTime LastLogin { get; set; }
+        [NotMapped]
         public string Token { get; set; }
         //public virtual ICollection<MaintenanceLog> MaintenanceLogs { get; set; }
         //public virtual ICollection<MaintenanceReport> MaintenanceReports { get; set; }

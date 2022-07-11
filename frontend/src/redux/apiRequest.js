@@ -3,11 +3,11 @@ import { loginFailed, loginStart, loginSuccess, logOutStart, registerFailed, reg
 import { deleteUserFailed, deleteUsersSuccess, deleteUserStart, getUsersFailed, getUsersStart, getUsersSuccess } from "./userSlice"
 //npm install axios
 export const loginUser = async(user, dispatch,navigate) => {
-    console.log("env is",process.env.Backend_URL)
     dispatch(loginStart())
     try {
         const res = await axios.post(`https://localhost:44328/api/Staffs/login`, user)
-        dispatch(loginSuccess(res.data))
+        console.log("data",res)
+        dispatch(loginSuccess(res.data.responseObject)) //dispatch loginSuccess res.data
         navigate("/admin/dashboard")
         console.log(res.data)
     } catch (err) {

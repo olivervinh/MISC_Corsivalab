@@ -4,6 +4,7 @@ using API.Models.Base;
 using API.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace API.Controllers
 {
@@ -22,7 +23,7 @@ namespace API.Controllers
             try
             {
                 var res = await _staffService.LoginAsync(dto);
-                return Ok(res);
+                return Ok(JsonConvert.SerializeObject(res));
             }
             catch(Exception ex)
             {

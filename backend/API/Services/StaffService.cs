@@ -83,8 +83,8 @@ namespace API.Services
                 Method = HttpMethod.Post,
                 RequestUri = new Uri("https://toolkit.corsivalab.com/token"),
                 Headers = {
-                    { HttpRequestHeader.Accept.ToString(), "text/plain" },
-                    { HttpRequestHeader.Cookie.ToString(), "ARRAffinity=d96391891af12dbd0803dfc56bab6a4a4e7a9d33e954ae05fd44bc7807ff50f8; ARRAffinitySameSite=d96391891af12dbd0803dfc56bab6a4a4e7a9d33e954ae05fd44bc7807ff50f8" },
+                    { HttpRequestHeader.Accept.ToString(), ConstantHelper.HttpRequestHeader_Text },
+                    { HttpRequestHeader.Cookie.ToString(), ConstantHelper.HttpRequestHeader_Cookie },
                 },
                 Content = new StringContent(@"email=" + email + "&password=" + password + "&grant_type=password")
             };
@@ -113,7 +113,7 @@ namespace API.Services
                 RequestUri = new Uri("https://toolkit.corsivalab.com/api/staff/MaintenancePortal"),
                 Headers = {
                     { HttpRequestHeader.Authorization.ToString(), "Bearer "+access_token+"" },
-                    { HttpRequestHeader.Cookie.ToString(), "ARRAffinity=d96391891af12dbd0803dfc56bab6a4a4e7a9d33e954ae05fd44bc7807ff50f8; ARRAffinitySameSite=d96391891af12dbd0803dfc56bab6a4a4e7a9d33e954ae05fd44bc7807ff50f8" },
+                    { HttpRequestHeader.Cookie.ToString(),ConstantHelper.HttpRequestHeader_Cookie  },
                 },
             };
             using (var response = await _httpClient.SendAsync(httpRequestMessage))
@@ -141,10 +141,10 @@ namespace API.Services
                 RequestUri = new Uri("https://toolkit.corsivalab.com/api/staff/GetStaffByID"),
                 Headers = {
                     { HttpRequestHeader.Authorization.ToString(), "Bearer " + token + "" },
-                    { HttpRequestHeader.Accept.ToString(), "application/json" },
-                    { HttpRequestHeader.Cookie.ToString(), "ARRAffinity=d96391891af12dbd0803dfc56bab6a4a4e7a9d33e954ae05fd44bc7807ff50f8; ARRAffinitySameSite=d96391891af12dbd0803dfc56bab6a4a4e7a9d33e954ae05fd44bc7807ff50f8" },
+                    { HttpRequestHeader.Accept.ToString(), ConstantHelper.HttpRequestHeader_JSon },
+                    { HttpRequestHeader.Cookie.ToString(), ConstantHelper.HttpRequestHeader_Cookie },
                 },
-                Content = new StringContent(JsonConvert.SerializeObject(new{id = int.Parse(id)}), Encoding.UTF8, "application/json"),
+                Content = new StringContent(JsonConvert.SerializeObject(new{id = int.Parse(id)}), Encoding.UTF8, ConstantHelper.HttpRequestHeader_JSon),
             };
             using (var response = await _httpClient.SendAsync(httpRequestMessage))
             {
@@ -173,8 +173,8 @@ namespace API.Services
                 RequestUri = new Uri("https://toolkit.corsivalab.com/api/staff/GetAllStaff"),
                 Headers = {
                     { HttpRequestHeader.Authorization.ToString(), "Bearer "+token+"" },
-                    { HttpRequestHeader.Accept.ToString(),"application/json"},
-                    { HttpRequestHeader.Cookie.ToString(), "ARRAffinity=d96391891af12dbd0803dfc56bab6a4a4e7a9d33e954ae05fd44bc7807ff50f8; ARRAffinitySameSite=d96391891af12dbd0803dfc56bab6a4a4e7a9d33e954ae05fd44bc7807ff50f8" },
+                    { HttpRequestHeader.Accept.ToString(),ConstantHelper.HttpRequestHeader_JSon},
+                    { HttpRequestHeader.Cookie.ToString(), ConstantHelper.HttpRequestHeader_Cookie },
                 },
                 Content = new StringContent(""),
             };
