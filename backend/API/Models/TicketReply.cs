@@ -16,7 +16,7 @@ namespace API.Models
         public int IsStaff { get; set; }
         [Column(name: "Title", TypeName = "varchar(MAX)")]
         public string Title { get; set; }
-        [Column(name: "CreatedAt", TypeName = "datetime2(7)")]
+        [Column(name: "CreatedAt", TypeName = "datetime2(7)(7)")]
         public DateTime CreatedAt { get; set; }
         [Column(name: "Approve", TypeName = "bit")]
         public bool Approve { get; set; }

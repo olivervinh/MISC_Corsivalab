@@ -9,9 +9,9 @@ namespace API.Models
         public int FkProjectId { get; set; }
         [Column(name: "FkStaffId", TypeName = "int")]
         public int FkStaffId { get; set; }
-        [Column(name: "LastUpdate", TypeName = "datetime2")]
+        [Column(name: "LastUpdate", TypeName = "datetime2(7)")]
         public DateTime LastUpdate { get; set; }
-        [Column(name: "CreatedAt", TypeName = "datetime2")]
+        [Column(name: "CreatedAt", TypeName = "datetime2(7)")]
         public DateTime CreatedAt { get; set; }
         //[ForeignKey(nameof(FkProjectId))]
         //[ForeignKey(nameof(FkStaffId))]

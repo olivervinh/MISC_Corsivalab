@@ -12,9 +12,9 @@ namespace API.Models
         public string Password { get; set; }
         [Column(name: "Role", TypeName = "int")]
         public int Role { get; set; }
-        [Column(name: "CreatedAt", TypeName = "datetime2(7)")]
+        [Column(name: "CreatedAt", TypeName = "datetime2(7)(7)")]
         public DateTime CreatedAt { get; set; }
-        [Column(name: "LastLogin", TypeName = "datetime2(7)")]
+        [Column(name: "LastLogin", TypeName = "datetime2(7)(7)")]
         public DateTime LastLogin { get; set; }
         [NotMapped]
         public string Token { get; set; }

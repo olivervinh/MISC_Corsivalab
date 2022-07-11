@@ -6,7 +6,7 @@ namespace API.Models
     [Table("CLM_MaintenanceMontly")]
     public class MaintenanceMontly : EntityBase
     {
-        [Column("ExpiryTime", TypeName = "datetime2")]
+        [Column("ExpiryTime", TypeName = "datetime2(7)")]
         public DateTime ExpiryTime { get; set; }
         //[ForeignKey(nameof(FkProjectId))]
         [Column("FkProjectId", TypeName = "int")]

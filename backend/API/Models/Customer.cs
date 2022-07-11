@@ -15,9 +15,9 @@ namespace API.Models
         public string Email { get; set; }
         [Column(name: "Password", TypeName = "varchar(MAX)")]
         public string Password { get; set; }
-        [Column(name: "CreatedAt", TypeName = "datetime2")]
+        [Column(name: "CreatedAt", TypeName = "datetime2(7)")]
         public DateTime CreatedAt { get; set; }
-        [Column(name: "CreatedAt", TypeName = "datetime2")]
+        [Column(name: "CreatedAt", TypeName = "datetime2(7)")]
         public DateTime LastLogin { get; set; }
         [Column("FKIndustryId")]
         public int FkIndustryId { get; set; }

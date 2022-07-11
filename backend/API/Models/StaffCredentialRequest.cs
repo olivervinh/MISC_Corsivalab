@@ -6,7 +6,7 @@ namespace API.Models
     [Table("CLM_StaffCredentialRequest")]
     public class StaffCredentialRequest : EntityBase
     {
-        [Column(name: "Expiry", TypeName = "datetime2")]
+        [Column(name: "Expiry", TypeName = "datetime2(7)")]
         public DateTime ExpiryTime { get; set; }
         [Column(name: "Approved", TypeName = "bit")]
         public bool Approved { get; set; }

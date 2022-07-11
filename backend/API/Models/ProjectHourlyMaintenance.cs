@@ -10,7 +10,7 @@ namespace API.Models
         public string HourPackge { get; set; }
         [Column(name: "Cost", TypeName = "decimal(18,0)")]
         public decimal Cost { get; set; }
-        [Column(name: "PurchasedDate", TypeName = "datetime2")]
+        [Column(name: "PurchasedDate", TypeName = "datetime2(7)")]
         public DateTime PurchasedDate { get; set; }
         [Column(name: "HoursSpent", TypeName = "float")]
         public double HoursSpent { get; set; }

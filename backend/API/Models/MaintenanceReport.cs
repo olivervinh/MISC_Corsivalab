@@ -12,9 +12,9 @@ namespace API.Models
         public int FkStaffId { get; set; }
         [Column("Link", TypeName = "varchar(MAX)")]
         public string Link { get; set; }
-        [Column("CreatedAt", TypeName = "datetime2")]
+        [Column("CreatedAt", TypeName = "datetime2(7)")]
         public DateTime CreatedAt { get; set; }
-        [Column("MonthYear", TypeName = "datetime2")]
+        [Column("MonthYear", TypeName = "datetime2(7)")]
         public DateTime MonthYear { get; set; }
         //[ForeignKey(nameof(FkProjectId))]
         //[ForeignKey(nameof(FkStaffId))]

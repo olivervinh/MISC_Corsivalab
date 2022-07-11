@@ -8,7 +8,7 @@ namespace API.Models
     {
         [Column(name: "Domain", TypeName = "varchar(MAX)")]
         public string Domain { get; set; }
-        [Column(name: "Expiry", TypeName = "datetime2")]
+        [Column(name: "Expiry", TypeName = "datetime2(7)")]
         public DateTime Expiry { get; set; }
         [Column(name: "Provider", TypeName = "int")]
         public int Provider { get; set; }

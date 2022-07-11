@@ -8,7 +8,7 @@ namespace API.Models
     {
         [Column(name:"CredentialInfo", TypeName = "varchar(MAX)")]
         public string CredentialInfo { get; set; }
-        [Column(name: "LastUpdate", TypeName = "datetime2")]
+        [Column(name: "LastUpdate", TypeName = "datetime2(7)")]
         public DateTime LastUpdate { get; set; }
         //[ForeignKey(nameof(FkProjectId))]
         [Column(name: "FkProjectId", TypeName = "int")]

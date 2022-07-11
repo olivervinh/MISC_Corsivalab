@@ -6,7 +6,7 @@ namespace API.Models
     [Table("CLM_ProjectBackUp")]
     public class ProjectBackUp : EntityBase
     {
-        [Column("UpdatedAt", TypeName = "datetime2")]
+        [Column("UpdatedAt", TypeName = "datetime2(7)")]
         public DateTime UpdatedAt { get; set; }
         [Column("Link", TypeName = "varchar(MAX)")]
         public string Link { get; set; }

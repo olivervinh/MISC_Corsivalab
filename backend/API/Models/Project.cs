@@ -10,17 +10,17 @@ namespace API.Models
         public string Title { get; set; }
         [Column("Domain", TypeName = "varchar(MAX)")]
         public string Domain { get; set; }
-        [Column("MaintExpire", TypeName = "datetime2")]
+        [Column("MaintExpire", TypeName = "datetime2(7)")]
         public DateTime MaintExpire { get; set; }
         [Column("ForecastStart", TypeName = "varchar(MAX)")]
         public string ForecastStart { get; set; }
         [Column("Forecast", TypeName = "int")]
         public int Forecast { get; set; }
-        [Column("MaintStart", TypeName = "datetime2")]
+        [Column("MaintStart", TypeName = "datetime2(7)")]
         public DateTime MaintStart { get; set; }
-        [Column("ForecastAmount", TypeName = "datetime2")]
+        [Column("ForecastAmount", TypeName = "datetime2(7)")]
         public string ForecastAmount { get; set; }
-        [Column("EmailSystemExpire", TypeName = "datetime2")]
+        [Column("EmailSystemExpire", TypeName = "datetime2(7)")]
         public DateTime EmailSystemExpire { get; set; }
         [Column("EmailSystemOwner", TypeName = "varchar(MAX)")]
         public string EmailSystemOwner { get; set; }

@@ -8,9 +8,9 @@ namespace API.Models
     {
         [Column("Remark", TypeName = "varchar(MAX)")]
         public string Remark { get; set; }
-        [Column("LastUpdate", TypeName = "datetime2")]
+        [Column("LastUpdate", TypeName = "datetime2(7)")]
         public DateTime LastUpdate { get; set; }
-        [Column("CreatedAt", TypeName = "datetime2")]
+        [Column("CreatedAt", TypeName = "datetime2(7)")]
         public DateTime CreatedAt { get; set; }
         //[ForeignKey(nameof(FkProjectId))]
         [Column("FkProjectId", TypeName = "int")]

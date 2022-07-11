@@ -10,7 +10,7 @@ namespace API.Models
         public int Provider { get; set; }
         [Column(name: "Owner", TypeName = "int")]
         public int Owner { get; set; }
-        [Column(name: "Expiry", TypeName = "datetime2")]
+        [Column(name: "Expiry", TypeName = "datetime2(7)")]
         public DateTime Expiry { get; set; }
         //[ForeignKey(nameof(FkProjectId))]
         [Column(name: "FkProjectId", TypeName = "int")]
