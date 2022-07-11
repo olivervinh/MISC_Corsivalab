@@ -26,7 +26,6 @@ namespace API.Data
         public DbSet<ProjectHourlyMaintenance> ProjectHourlyMaintenances { get; set; }
         public DbSet<ProjectHourlyMaintenanceRecord> ProjectHourlyMaintenanceRecords { get; set; }
         public DbSet<ProjectMonthlyMaintenance> ProjectMonthlyMaintenances { get; set; }
-        public DbSet<Provider> Providers { get; set; }
         public DbSet<Quotation> Quotations { get; set; }
         public DbSet<Staff> Staffs { get; set; }
         public DbSet<StaffCredentialRequest> StaffCredentialRequests { get; set; }
