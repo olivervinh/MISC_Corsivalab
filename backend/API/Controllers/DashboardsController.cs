@@ -12,18 +12,16 @@ namespace API.Controllers
     public class DashboardsController : ControllerBase
     {
         private readonly IProjectService _projectService;
-        private readonly AppDbContext _appDbContext;
-        public DashboardsController(IProjectService projectService, AppDbContext appDbContext)
+        public DashboardsController(IProjectService projectService)
         {
             _projectService = projectService;
-            _appDbContext = appDbContext;
         }
         [HttpGet("GetAll")]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll(int pageNumber,int pageSize)
         {
             try
             {
-                return Ok(JsonConvert.SerializeObject(await _projectService.GetAll()));
+                return Ok(JsonConvert.SerializeObject(await _projectService.PaginatedListProject(pageNumber,pageSize)));
             }
             catch(Exception ex)
             {

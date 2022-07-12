@@ -14,6 +14,7 @@ namespace API.Services
         public Task<IEnumerable<Project>> ListProject120Email();
         public Task<IEnumerable<Project>> ListProject120Maintenance();
         public Task<IEnumerable<CountProjectDto>> ListProjectCountMaintenance();
+        public Task<PaginatedListHelper<Project>> PaginatedListProject(int pageNumber, int pageSize);
         //be call
         public Task<Project> GetProjectByFirstVariableDashboardViewModel(int Id, string expiry_date);
         //be call
@@ -146,6 +147,11 @@ namespace API.Services
                    MaintainBy = item.FirstOrDefault().MaintainBy,
                    Countproject = item.Count(),
                }).ToListAsync();
+        }
+
+        public async Task<PaginatedListHelper<Project>> PaginatedListProject(int pageNumber,int pageSize)
+        {
+            return await PaginatedListHelper<Project>.CreateAsync(_context.Projects.AsNoTracking(), pageNumber != null ? pageNumber : 1, pageSize);
         }
     }
 }
