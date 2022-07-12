@@ -1,4 +1,5 @@
 ﻿using API.Data;
+using API.Models;
 using API.Models.Base;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,11 +18,12 @@ namespace API.Services.Base
     }
     public class BaseService<T> : IBaseService<T> where T : EntityBase
     {
-        public AppDbContext _context;
-        public DbSet<T> dbSet;
+        protected readonly AppDbContext _context;
+        protected DbSet<T> dbSet;
         public BaseService(AppDbContext context)
         {
             _context = context;
+            dbSet = context.Set<T>();
         }
         public async Task<T> Create(T param)
         {

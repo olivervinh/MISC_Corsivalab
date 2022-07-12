@@ -19,6 +19,6 @@ namespace API.Models
         [Column(name: "remarks", TypeName = "nchar(10)")]
         public string Remark { get; set; }
         [Column(name: "finalised", TypeName = "date")]
-        public string Finalised { get; set; }
+        public DateTime Finalised { get; set; }
     }
 }

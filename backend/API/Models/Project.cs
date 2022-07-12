@@ -7,56 +7,56 @@ namespace API.Models
     public class Project : EntityBase
     {
         [Column("Title", TypeName = "varchar(MAX)")]
-        public string Title { get; set; }
+        public string? Title { get; set; }
         [Column("Domain", TypeName = "varchar(MAX)")]
-        public string Domain { get; set; }
+        public string? Domain { get; set; }
         [Column("MaintExpire", TypeName = "datetime2(7)")]
-        public DateTime MaintExpire { get; set; }
+        public DateTime? MaintExpire { get; set; }
         [Column("ForecastStart", TypeName = "varchar(MAX)")]
-        public string ForecastStart { get; set; }
+        public string? ForecastStart { get; set; }
         [Column("Forecast", TypeName = "int")]
-        public int Forecast { get; set; }
+        public int? Forecast { get; set; }
         [Column("MaintStart", TypeName = "datetime2(7)")]
-        public DateTime MaintStart { get; set; }
+        public DateTime? MaintStart { get; set; }
         [Column("ForecastAmount", TypeName = "varchar(MAX)")]
-        public string ForecastAmount { get; set; }
+        public string? ForecastAmount { get; set; }
         [Column("EmailSystemExpire", TypeName = "datetime2(7)")]
-        public DateTime EmailSystemExpire { get; set; }
+        public DateTime? EmailSystemExpire { get; set; }
         [Column("EmailSystemOwner", TypeName = "varchar(MAX)")]
-        public string EmailSystemOwner { get; set; }
+        public string? EmailSystemOwner { get; set; }
         [Column("FK_CustomerId", TypeName = "int")]
-        public int FkCustomerId { get; set; }
+        public int? FkCustomerId { get; set; }
         [Column("MaintainBy", TypeName = "varchar(MAX)")]
-        public string MaintainBy { get; set; }
+        public string? MaintainBy { get; set; }
         [Column("FK_EmailSystemId", TypeName = "int")]
-        public int FkEmailSystemId { get; set; }
+        public int? FkEmailSystemId { get; set; }
         [Column("AMEmail", TypeName = "varchar(MAX)")]
-        public string AMEmail { get; set; }
+        public string? AMEmail { get; set; }
         [Column("Phase", TypeName = "int")]
-        public int Phase { get; set; }
+        public int? Phase { get; set; }
         [Column("ProjectNature", TypeName = "int")]
-        public int ProjectNature { get; set; }
+        public int? ProjectNature { get; set; }
         [Column("DomainCost", TypeName = "varchar(MAX)")]
-        public string DomainCost { get; set; }
+        public string? DomainCost { get; set; }
         [Column("HostingCost", TypeName = "varchar(MAX)")]
-        public string HostingCost { get; set; }
+        public string? HostingCost { get; set; }
         [Column("EmailCost", TypeName = "varchar(MAX)")]
-        public string EmailCost { get; set; }
+        public string? EmailCost { get; set; }
         [Column("MaintCost", TypeName = "varchar(MAX)")]
-        public string MaintCost { get; set; }
+        public string? MaintCost { get; set; }
         [Column("Remarks", TypeName = "varchar(MAX)")]
-        public string Remark { get; set; }
+        public string? Remark { get; set; }
         [Column("Code", TypeName = "varchar(255)")]
-        public string Code { get; set; }
+        public string? Code { get; set; }
         [Column("ShortLink", TypeName = "varchar(MAX)")]
-        public string ShortLink { get; set; }
+        public string? ShortLink { get; set; }
         //[ForeignKey(nameof(FkCustomerId))]
         //[ForeignKey(nameof(FkEmailSystemId))]
         //[ForeignKey(nameof(FkDomainProviderId))]
         [Column("FKDomainProvider", TypeName = "int")]
-        public int FkDomainProviderId { get; set; }
+        public int? FkDomainProviderId { get; set; }
         [Column("CreatedAtDatetime", TypeName = "datetime2(7)")]
-        public DateTime CreatedAtDatetime { get; set; }
+        public DateTime? CreatedAtDatetime { get; set; }
         [NotMapped]
         public Customer Customer { get; set; }
         [NotMapped]
