@@ -13,13 +13,13 @@ namespace API.Models
         public string Company { get; set; }
         [Column(name: "Email", TypeName = "varchar(MAX)")]
         public string Email { get; set; }
-        [Column(name: "Password", TypeName = "varchar(MAX)")]
+        [Column(name: "Password", TypeName = "nvarchar(MAX)")]
         public string Password { get; set; }
         [Column(name: "CreatedAt", TypeName = "datetime2(7)")]
         public DateTime CreatedAt { get; set; }
-        [Column(name: "CreatedAt", TypeName = "datetime2(7)")]
+        [Column(name: "LastLogin", TypeName = "datetime2(7)")]
         public DateTime LastLogin { get; set; }
-        [Column("FKIndustryId")]
+        [Column("FK_IndustryId")]
         public int FkIndustryId { get; set; }
         //table database
         [NotMapped]

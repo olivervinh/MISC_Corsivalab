@@ -5,9 +5,9 @@ namespace API.Models
     [Table("CLM_ProjectCredentialLog")]
     public class ProjectCredentialLog : EntityBase
     {
-        [Column(name: "FkProjectId", TypeName = "int")]
+        [Column(name: "FK_ProjectId", TypeName = "int")]
         public int FkProjectId { get; set; }
-        [Column(name: "FkStaffId", TypeName = "int")]
+        [Column(name: "FK_StaffId", TypeName = "int")]
         public int FkStaffId { get; set; }
         [Column(name: "LastUpdate", TypeName = "datetime2(7)")]
         public DateTime LastUpdate { get; set; }
@@ -15,7 +15,7 @@ namespace API.Models
         public DateTime CreatedAt { get; set; }
         //[ForeignKey(nameof(FkProjectId))]
         //[ForeignKey(nameof(FkStaffId))]
-        [Column(name: "Remark", TypeName = "varchar(MAX)")]
+        [Column(name: "Remarks", TypeName = "varchar(MAX)")]
         public string Remark { get; set; }
         //public virtual Project Project { get; set; }
         //public virtual Staff Staff { get; set; }

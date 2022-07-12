@@ -30,7 +30,7 @@ namespace API.Models
         //public virtual Customer Customer { get; set; }
         //public virtual Project Project { get; set; }
         //public virtual Staff Staff { get; set; }
-        [Column(name: "CreatedAt", TypeName = "datetime2(7)(7)")]
+        [Column(name: "CreatedAt", TypeName = "datetime2(7)")]
         public DateTime CreatedAt { get; set; }
         //public virtual ICollection<TicketImage> TicketImages { get; set; }
         //public virtual ICollection<TicketReply> TicketReplies { get; set; }

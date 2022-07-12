@@ -15,7 +15,7 @@ namespace API.Models
         [Column(name: "Owner", TypeName = "int")]
         public int Owner { get; set; }
         //[ForeignKey(nameof(FkProjectId))]
-        [Column(name: "FkProjectId", TypeName = "int")]
+        [Column(name: "FK_ProjectID", TypeName = "int")]
         public int FkProjectId { get; set; }
         [Column(name: "Cost", TypeName = "varchar(MAX)")]
         public string Cost { get; set; }

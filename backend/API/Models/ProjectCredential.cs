@@ -6,12 +6,12 @@ namespace API.Models
     [Table("CLM_ProjectCredential")]
     public class ProjectCredential : EntityBase
     {
-        [Column(name:"CredentialInfo", TypeName = "varchar(MAX)")]
+        [Column(name: "CredentialInfos", TypeName = "varchar(MAX)")]
         public string CredentialInfo { get; set; }
         [Column(name: "LastUpdate", TypeName = "datetime2(7)")]
         public DateTime LastUpdate { get; set; }
         //[ForeignKey(nameof(FkProjectId))]
-        [Column(name: "FkProjectId", TypeName = "int")]
+        [Column(name: "FK_ProjectId", TypeName = "int")]
         public int FkProjectId { get; set; }
         //public virtual Project Project { get; set; }
     }

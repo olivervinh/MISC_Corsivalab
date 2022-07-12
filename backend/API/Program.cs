@@ -9,7 +9,7 @@ services.AddHttpClient();
 services.AddControllers();
 services.AddEndpointsApiExplorer();
 services.AddSwaggerGen();
-services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("db")));
+services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString(ConstantHelper.ConnectionStringSandbox)));
 #region Register DI
 services.AddScoped(typeof(IBaseService<>), typeof(BaseService<>));
 services.AddScoped<ICustomerService, CustomerService>();

@@ -11,7 +11,7 @@ namespace API.Models
         [Column("Link", TypeName = "varchar(MAX)")]
         public string Link { get; set; }
         //[ForeignKey(nameof(FkProjectId))]
-        [Column("FkProjectId", TypeName = "int")]
+        [Column("FK_ProjectId", TypeName = "int")]
         public int FkProjectId { get; set; }
         //public virtual Project Project { get; set; }
     }

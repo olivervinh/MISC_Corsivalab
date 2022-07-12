@@ -17,10 +17,12 @@ namespace API.Services
     public interface IStaffService : IBaseService<Staff> 
     {
         public Task<ResponseClass> LoginAsync(LoginDto dto);
+        //be call
         public Task<TokenResponse> GetToken(string email, string password);
         public Task<AuthResponse> GetAuth(string access_token);
         public Task<StaffObject> GetStaffByID(string id, string token);
         public Task<List<StaffObject>> GetAllStaff(string Token);
+        //be call
     }
     public class StaffService : BaseService<Staff>,IStaffService
     {
@@ -76,6 +78,7 @@ namespace API.Services
                     return new ResponseClass();
             }
         }
+        //be call
         public async Task<TokenResponse> GetToken(string email, string password)
         {
             var httpRequestMessage = new HttpRequestMessage
@@ -195,5 +198,6 @@ namespace API.Services
             }
             return null;
         }
+        //be call
     }
 }

@@ -6,14 +6,14 @@ namespace API.Models
     [Table("CLM_StaffCredentialRequest")]
     public class StaffCredentialRequest : EntityBase
     {
-        [Column(name: "Expiry", TypeName = "datetime2(7)")]
+        [Column(name: "ExpiryTime", TypeName = "datetime2(7)")]
         public DateTime ExpiryTime { get; set; }
         [Column(name: "Approved", TypeName = "bit")]
         public bool Approved { get; set; }
         //[ForeignKey(nameof(FkStaffId))]
-        [Column(name: "FkStaffId", TypeName = "int")]
+        [Column(name: "FK_StaffId", TypeName = "int")]
         public int FkStaffId { get; set; }
-        [Column(name: "FkProjectId", TypeName = "int")]
+        [Column(name: "FK_ProjectId", TypeName = "int")]
         //[ForeignKey(nameof(FkProjectId))]
         public int FkProjectId { get; set; }
         //public virtual Staff Staff { get; set; }

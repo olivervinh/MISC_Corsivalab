@@ -1,24 +1,30 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
+import "assets/css/App.css";
+import { HashRouter, Route, Switch, Redirect } from "react-router-dom";
+import AuthLayout from "layouts/auth";
+import AdminLayout from "layouts/admin";
+import { ChakraProvider } from "@chakra-ui/react";
+import theme from "theme/theme";
 import {Provider} from "react-redux"
 import {store,persistor} from "./redux/store" //import cái store này vào
 import { PersistGate } from 'redux-persist/integration/react'
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <Provider store={store}> 
-    <React.StrictMode>
-      <PersistGate loading={null} persistor={persistor}>
-        <App />
+import {Link} from "react-router-dom"
+ReactDOM.render(
+  <Provider store={store}>
+    <ChakraProvider theme={theme}>
+      <React.StrictMode>
+        <PersistGate loading={null} persistor={persistor}>
+          <HashRouter>
+            <Switch>
+              <Route path={`/auth`} component={AuthLayout} />
+              <Route path={`/admin`} component={AdminLayout} />
+            <Redirect from='/' to='/admin' />
+          </Switch>
+        </HashRouter>
       </PersistGate>
     </React.StrictMode>
-  </Provider>
+  </ChakraProvider>
+  </Provider>,  
+  document.getElementById("root")
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
-//ráp lại bằng provider

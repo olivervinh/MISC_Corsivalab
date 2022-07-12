@@ -9,7 +9,7 @@ namespace API.Models
         [Column("ExpiryTime", TypeName = "datetime2(7)")]
         public DateTime ExpiryTime { get; set; }
         //[ForeignKey(nameof(FkProjectId))]
-        [Column("FkProjectId", TypeName = "int")]
+        [Column("FK_ProjectId", TypeName = "int")]
         public int FkProjectId { get; set; }
         //public virtual Project Project { get; set; }
         //[ForeignKey(nameof(FkCustomerId))]

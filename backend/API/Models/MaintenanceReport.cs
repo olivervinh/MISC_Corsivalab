@@ -6,9 +6,9 @@ namespace API.Models
     [Table("CLM_MaintenanceReport")]
     public class MaintenanceReport : EntityBase
     {
-        [Column("FkProjectId", TypeName = "int")]
+        [Column("FK_ProjectId", TypeName = "int")]
         public int FkProjectId { get; set; }
-        [Column("FkStaffId", TypeName = "int")]
+        [Column("FK_StaffId", TypeName = "int")]
         public int FkStaffId { get; set; }
         [Column("Link", TypeName = "varchar(MAX)")]
         public string Link { get; set; }

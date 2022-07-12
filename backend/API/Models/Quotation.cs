@@ -16,7 +16,7 @@ namespace API.Models
         public decimal QuotationJson { get; set; }
         [Column(name: "totalQuote", TypeName = "decimal(18,2)")]
         public decimal TotalQuote { get; set; }
-        [Column(name: "remark", TypeName = "nchar(10)")]
+        [Column(name: "remarks", TypeName = "nchar(10)")]
         public string Remark { get; set; }
         [Column(name: "finalised", TypeName = "date")]
         public string Finalised { get; set; }

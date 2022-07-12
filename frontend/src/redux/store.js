@@ -34,10 +34,3 @@ export const store = configureStore({ //export cái store này ra
 })
 
 export let persistor = persistStore(store)
-//store là nơi chứa toàn bộ reduce
-//redux toolkit là 1 cách sử dụng stage bất cứ đâu trong React App, ko cần phải truyền qua props
-//export default configureStore({
-// reducer:{
-//    auth:authReducer  //export cái này ra
-//},    
-//}) 

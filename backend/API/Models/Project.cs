@@ -18,17 +18,17 @@ namespace API.Models
         public int Forecast { get; set; }
         [Column("MaintStart", TypeName = "datetime2(7)")]
         public DateTime MaintStart { get; set; }
-        [Column("ForecastAmount", TypeName = "datetime2(7)")]
+        [Column("ForecastAmount", TypeName = "varchar(MAX)")]
         public string ForecastAmount { get; set; }
         [Column("EmailSystemExpire", TypeName = "datetime2(7)")]
         public DateTime EmailSystemExpire { get; set; }
         [Column("EmailSystemOwner", TypeName = "varchar(MAX)")]
         public string EmailSystemOwner { get; set; }
-        [Column("FkCustomerId", TypeName = "int")]
+        [Column("FK_CustomerId", TypeName = "int")]
         public int FkCustomerId { get; set; }
         [Column("MaintainBy", TypeName = "varchar(MAX)")]
         public string MaintainBy { get; set; }
-        [Column("FkEmailSystemId", TypeName = "int")]
+        [Column("FK_EmailSystemId", TypeName = "int")]
         public int FkEmailSystemId { get; set; }
         [Column("AMEmail", TypeName = "varchar(MAX)")]
         public string AMEmail { get; set; }
@@ -44,7 +44,7 @@ namespace API.Models
         public string EmailCost { get; set; }
         [Column("MaintCost", TypeName = "varchar(MAX)")]
         public string MaintCost { get; set; }
-        [Column("Remark", TypeName = "varchar(MAX)")]
+        [Column("Remarks", TypeName = "varchar(MAX)")]
         public string Remark { get; set; }
         [Column("Code", TypeName = "varchar(255)")]
         public string Code { get; set; }
@@ -53,8 +53,28 @@ namespace API.Models
         //[ForeignKey(nameof(FkCustomerId))]
         //[ForeignKey(nameof(FkEmailSystemId))]
         //[ForeignKey(nameof(FkDomainProviderId))]
-        [Column("FkDomainProviderId", TypeName = "int")]
+        [Column("FKDomainProvider", TypeName = "int")]
         public int FkDomainProviderId { get; set; }
+        [Column("CreatedAtDatetime", TypeName = "datetime2(7)")]
+        public DateTime CreatedAtDatetime { get; set; }
+        [NotMapped]
+        public Customer Customer { get; set; }
+        [NotMapped]
+        public ProjectBackUp BackUp { get; set; }
+        [NotMapped]
+        public ProjectCredential Credential { get; set; }
+        [NotMapped]
+        public MaintenanceMontly Maintenance { get; set; }
+        [NotMapped]
+        public MaintenanceReport report { get; set; }
+        [NotMapped]
+        public string Token { get; set; } // For API purposes
+        [NotMapped]
+        public string newId { get; set; } // For API purposes
+        [NotMapped]
+        public string Expiry { get; set; } // Get Expiry Date for Dashboard
+        [NotMapped]
+        public DateTime ExpiryDashboardView { get; set; } // Show Expiry date domain
         //public virtual Customer Customer { get; set; }
         //public virtual EmailSystem EmailSystem { get; set; }
         //public virtual DomainProvider DomainProvider { get; set; }
