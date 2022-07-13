@@ -6,6 +6,7 @@ import  { Redirect } from 'react-router-dom'
 export const loginUser = async(user, dispatch,navigate) => {
     dispatch(loginStart())
     try {
+        
         const res = await axios.post(`https://localhost:44328/api/Staffs/login`, user)
         console.log("data",res)
         dispatch(loginSuccess(res.data.responseObject)) //dispatch loginSuccess res.data
