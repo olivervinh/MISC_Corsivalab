@@ -9,12 +9,23 @@ namespace API.Services
 {
     public interface IProjectService : IBaseService<Project>
     {
-        public Task<IEnumerable<Project>> ListProject120Domain();
-        public Task<IEnumerable<Project>> ListProject120Hosting();
-        public Task<IEnumerable<Project>> ListProject120Email();
-        public Task<IEnumerable<Project>> ListProject120Maintenance();
+        //IQueryable IEnumrable
+        public Task<IQueryable<Project>> ListProject120Domain();
+        public Task<IQueryable<Project>> ListProject120Hosting();
+        public Task<IQueryable<Project>> ListProject120Email();
+        public Task<IQueryable<Project>> ListProject120Maintenance();
         public Task<IEnumerable<CountProjectDto>> ListProjectCountMaintenance();
+        public Task<int> ListProjectsNoPerson();
+        //IQueryable IEnumrable
+
+        //Paginated
         public Task<PaginatedListHelper<Project>> PaginatedListProject(int pageNumber, int pageSize);
+        public Task<PaginatedListHelper<Project>> PaginatedListProject120Domain(int pageNumber, int pageSize);
+        public Task<PaginatedListHelper<Project>> PaginatedListProject120Hosting(int pageNumber, int pageSize);
+        public Task<PaginatedListHelper<Project>> PaginatedListProject120Email(int pageNumber, int pageSize);
+        public Task<PaginatedListHelper<Project>> PaginatedListProject120Maintenance(int pageNumber, int pageSize);
+        //Paginated
+
         //be call
         public Task<Project> GetProjectByFirstVariableDashboardViewModel(int Id, string expiry_date);
         //be call
@@ -28,16 +39,17 @@ namespace API.Services
         public async Task<int> CountNotTagged()
         {
             return await _context.Projects
-                  .Where(x => x.MaintainBy == "-" || x.MaintainBy == "0" && x.Phase == 3)
+                  .Where(x => x.MaintainBy == "-" || x.MaintainBy == "0" && x.Phase == 3 && x.SoftDelete == false)
                   .CountAsync();
         }
-        public async Task<IEnumerable<Project>> ListProject120Domain()
+        public async Task<IQueryable<Project>> ListProject120Domain()
         {
             var listProject120Domain = new List<Project>();
-            var domainListWithoutCustomer = _context.ProjectDomains.Where(x => x.Owner == 1);
+            var domainListWithoutCustomer = _context.ProjectDomains.Where(x => x.Owner == 1 && x.SoftDelete == false);
             var domainListNewest = await domainListWithoutCustomer
+                .OrderBy(s=>s.Id)
                 .GroupBy(s => s.FkProjectId)
-                .Select(s => s.LastOrDefault())
+                .Select(s => s.FirstOrDefault())
                 .ToListAsync();
             if(domainListNewest.Count>0)
             {
@@ -49,15 +61,16 @@ namespace API.Services
                     }
                 }
             }
-            return listProject120Domain;
+            return (IQueryable<Project>)listProject120Domain;
         }
-        public async Task<IEnumerable<Project>> ListProject120Hosting()
+        public async Task<IQueryable<Project>> ListProject120Hosting()
         {
             var listProject120Hosting = new List<Project>();
-            var hostingListWithoutCustomer = _context.ProjectHostings.Where(x => x.Owner == 1);
+            var hostingListWithoutCustomer = _context.ProjectHostings.Where(x => x.Owner == 1 && x.SoftDelete == false);
             var hostingListNewest = await hostingListWithoutCustomer
+                .OrderBy(s=>s.Id)
                 .GroupBy(s => s.FkProjectId)
-                .Select(s => s.LastOrDefault())
+                .Select(s => s.FirstOrDefault())
                 .ToListAsync();
             if (hostingListNewest.Count > 0)
             {
@@ -69,15 +82,16 @@ namespace API.Services
                     }
                 }
             }
-            return listProject120Hosting;
+            return (IQueryable<Project>)listProject120Hosting;
         }
-        public async Task<IEnumerable<Project>> ListProject120Email()
+        public async Task<IQueryable<Project>> ListProject120Email()
         {
             var listProject120Email = new List<Project>();
-            var emailListWithoutCustomer = _context.ProjectEmailSystems.Where(x => x.Owner == 1);
+            var emailListWithoutCustomer = _context.ProjectEmailSystems.Where(x => x.Owner == 1 && x.SoftDelete == false);
             var emailListNewest = await emailListWithoutCustomer
+                .OrderBy(s => s.Id)
                 .GroupBy(s => s.FkProjectId)
-                .Select(s => s.LastOrDefault())
+                .Select(s => s.FirstOrDefault())
                 .ToListAsync();
             if (emailListNewest.Count > 0)
             {
@@ -89,15 +103,16 @@ namespace API.Services
                     }
                 }
             }
-            return listProject120Email;
+            return (IQueryable<Project>)listProject120Email;
         }
-        public async Task<IEnumerable<Project>> ListProject120Maintenance()
+        public async Task<IQueryable<Project>> ListProject120Maintenance()
         {
             var listProject120Maintenance = new List<Project>();
             var maintenanceListWithoutCustomer = _context.ProjectMonthlyMaintenances;
             var maintenanceListNewest = await maintenanceListWithoutCustomer
+                .OrderBy(s=>s.Id)
                 .GroupBy(s => s.FkProjectId)
-                .Select(s => s.LastOrDefault())
+                .Select(s => s.FirstOrDefault())
                 .ToListAsync();
             if (maintenanceListNewest.Count > 0)
             {
@@ -109,11 +124,11 @@ namespace API.Services
                     }
                 }
             }
-            return listProject120Maintenance;
+            return (IQueryable<Project>)listProject120Maintenance;
         }
         public async Task<Project> GetProjectByFirstVariableDashboardViewModel(int Id, string expiry_date)
         {
-            var project =  await _context.Projects.FirstOrDefaultAsync(x => x.Id == Id);
+            var project =  await _context.Projects.FirstOrDefaultAsync(x => x.Id == Id&& x.SoftDelete == false);
             var newProject = new Project()
             {
                 Id = project.Id,
@@ -152,6 +167,31 @@ namespace API.Services
         public async Task<PaginatedListHelper<Project>> PaginatedListProject(int pageNumber,int pageSize)
         {
             return await PaginatedListHelper<Project>.CreateAsync(_context.Projects.AsNoTracking(), pageNumber != null ? pageNumber : 1, pageSize);
+        }
+
+        public async Task<PaginatedListHelper<Project>> PaginatedListProject120Domain(int pageNumber, int pageSize)
+        {
+            return await PaginatedListHelper<Project>.CreateAsync(await ListProject120Domain(), pageNumber != null ? pageNumber : 1, pageSize);
+        }
+
+        public async Task<PaginatedListHelper<Project>> PaginatedListProject120Hosting(int pageNumber, int pageSize)
+        {
+            return await PaginatedListHelper<Project>.CreateAsync(await ListProject120Hosting(), pageNumber != null ? pageNumber : 1, pageSize);
+        }
+
+        public async Task<PaginatedListHelper<Project>> PaginatedListProject120Email(int pageNumber, int pageSize)
+        {
+            return await PaginatedListHelper<Project>.CreateAsync(await ListProject120Email(), pageNumber != null ? pageNumber : 1, pageSize);
+        }
+
+        public async Task<PaginatedListHelper<Project>> PaginatedListProject120Maintenance(int pageNumber, int pageSize)
+        {
+            return await PaginatedListHelper<Project>.CreateAsync(await ListProject120Maintenance(), pageNumber != null ? pageNumber : 1, pageSize);
+        }
+
+        public async Task<int> ListProjectsNoPerson()
+        {
+            return await _context.Projects.Where(x => x.SoftDelete==false&& x.MaintainBy == "-" || x.MaintainBy == "0" && x.Phase == 3).CountAsync();
         }
     }
 }
