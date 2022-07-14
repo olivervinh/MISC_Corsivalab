@@ -7,7 +7,7 @@ import AdminLayout from "layouts/admin";
 import { ChakraProvider } from "@chakra-ui/react";
 import theme from "theme/theme";
 import {Provider} from "react-redux"
-import {store,persistor} from "./redux/store" //import cái store này vào
+import {store,persistor} from "./services/redux/store" //import cái store này vào
 import { PersistGate } from 'redux-persist/integration/react'
 import {Link} from "react-router-dom"
 ReactDOM.render(

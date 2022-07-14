@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './index.css'
 import Image from '../../../assets/login/images/corsivalab.png'
 import Tilt from 'react-tilt'
-import { loginUser } from "../../../redux/userApiRequest";
+import { loginUser } from "../../../services/api/userApiRequest";
 import { useDispatch } from "react-redux";
 function SignIn(){
     //init use stage
