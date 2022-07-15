@@ -4,16 +4,15 @@ import { deleteUserFailed, deleteUsersSuccess, deleteUserStart, getUsersFailed, 
 import  { Redirect } from 'react-router-dom'
 import axiosClient from "./axiosClient"
 //npm install axios
-export const loginUser = async(user, dispatch) => {
+export const loginUser = async(user, dispatch,navigate) => {
     dispatch(loginStart())
     try {
         const url = 'staffs/login'
         const res = await axiosClient.post(url,user)
-        console.log("data",res)
-        dispatch(loginSuccess(res.data.responseObject)) //dispatch loginSuccess res.data
-        console.log(res.data)
-        return <Redirect to='/'/>
+        dispatch(loginSuccess(res.responseObject)) //dispatch loginSuccess res.data
+        return res.responseObject
     } catch (err) {
         dispatch(loginFailed())
+        return err
     }
 }

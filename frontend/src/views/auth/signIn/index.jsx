@@ -4,19 +4,29 @@ import Image from '../../../assets/login/images/corsivalab.png'
 import Tilt from 'react-tilt'
 import { loginUser } from "../../../services/api/userApiRequest";
 import { useDispatch } from "react-redux";
-function SignIn(){
+import { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+ function  SignIn(){
     //init use stage
+    const history = useHistory()
     const [username,setUserName]=useState("hoongyaw@corsivalab.com")
     const [password,setPassword]=useState("corsiva_LAB_1991")
+    const [localStorage_user,setLocalStorage_user] = useState()
     const dispatch = useDispatch()
-    const handleLogin=(e)=>{
+    const handleLogin= (e)=>{
         e.preventDefault()
         const newUser={
             username:username,
             password:password,
         }
-        console.log(newUser)
-        loginUser(newUser,dispatch)
+        var result = loginUser(newUser,dispatch)
+        result.then(function(res){
+            localStorage.setItem('user',res)
+            console.log("user object",res)
+            if(res!=null){
+                history.push('/admin')
+            }
+        })
     }
     return (
         <div class="limiter">
