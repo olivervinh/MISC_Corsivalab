@@ -4,7 +4,7 @@ import Footer from "components/footer/FooterAdmin.js";
 // Layout components
 import Navbar from "components/navbar/NavbarAdmin.js";
 import Sidebar from "components/sidebar/Sidebar.js";
-import { SidebarContext } from "contexts/SidebarContext";
+import { SidebarContext } from "services/contexts/SidebarContext"; 
 import React, { useState } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import routes from "routes.js";

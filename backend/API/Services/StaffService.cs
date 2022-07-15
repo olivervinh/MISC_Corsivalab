@@ -50,13 +50,13 @@ namespace API.Services
             switch (aResponse.responseCode)
             {
                 case "200":
-                    var token = await GetStaffByID(aResponse.responseObject, tResponse.access_token);
+                    var staffObject = await GetStaffByID(aResponse.responseObject, tResponse.access_token);
                     return new ResponseClass()
                     {
                         responseCode = 200,
                         responseMessage = "Successfully",
                         responseName = "OK",
-                        responseObject = token,
+                        responseObject = staffObject,
                     };
                 case "301":
                     return new ResponseClass()

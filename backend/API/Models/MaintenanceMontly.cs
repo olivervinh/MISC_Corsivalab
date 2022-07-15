@@ -11,9 +11,11 @@ namespace API.Models
         //[ForeignKey(nameof(FkProjectId))]
         [Column("FK_ProjectId", TypeName = "int")]
         public int FkProjectId { get; set; }
-        //public virtual Project Project { get; set; }
+        [NotMapped]
+        public virtual Project Project { get; set; }
         //[ForeignKey(nameof(FkCustomerId))]
         //public int FkCustomerId { get; set; }
-        //public virtual Customer Customer { get; set; }
+        [NotMapped]
+        public virtual Customer Customer { get; set; }
     }
 }
