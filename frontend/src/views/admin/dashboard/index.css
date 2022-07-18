@@ -1,0 +1,26 @@
+.table td, .table th {
+    padding: 1rem;
+    vertical-align: top;
+    border-top: 1px
+  solid #f4f5f8;
+}
+.playground-image{
+    max-width:50px;
+}
+.custom-table-responsive{
+    overflow-x:auto;
+    overflow:unset;
+}
+.playground-section {
+    cursor:pointer;
+}
+@media only screen and (max-width: 600px) {
+    .m-portlet__head-text{
+        font-size: 15px;
+        text-align:center;
+    }
+    .custom-table-responsive{
+        overflow-x:auto;
+        overflow:scroll;
+    }
+}
