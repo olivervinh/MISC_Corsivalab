@@ -1,46 +1,48 @@
-import React from 'react'
-import ImageGoogleDoc from '../../../../assets/dashboard/google-docs-144.png'
-import urlGoogleDoc from '../variables/urlGoogleDoc'
-import { Link} from 'react-router-dom';
-function ActMainProjAssigned() {
-    const HandoverRecordOnClick = () => {
-        window.open(urlGoogleDoc.HandoverRecord)
-    }
-    const HostingRecordOnClick = () => {
-        window.open(urlGoogleDoc.HostingRecord)
-    }
-    const HourlyMaintenanceTrackingOnClick = () => {
-        window.open(urlGoogleDoc.HourlyMaintenanceTracking)
-    }
-    const ReplyTemplateOnClick = () => {
-        window.open(urlGoogleDoc.ReplyTemplate)
-    }
-    const RenewalRecordOnClick = () => {
-        window.open(urlGoogleDoc.RenewalRecord)
-    }
-    const CustomerEmailRecordOnClick = () => {
-        window.open(urlGoogleDoc.CustomerEmailRecord)
-    }
-    const ProjectPPTOnClick = () => {
-        window.open(urlGoogleDoc.ProjectPPT)
-    }
-    const MaintenanceLDPOnClick = () => {
-        window.open(urlGoogleDoc.MaintenanceLDP)
-    }
+import { mapResponsive } from '@chakra-ui/utils'
+import React, { useEffect, useState } from 'react'
+import axiosClient from 'services/api/axiosClient'
+export const ActMainProjAssigned = () => {
+    const [CountProjNotTaggedData,setCountProjNotTaggedData] = useState([])
+    useEffect(()=>{
+        async function getCountProjNotTaggedData(){
+            const res = await axiosClient.get('Dashboards/ListProjectCountMaintenance')
+            return res
+        }
+        getCountProjNotTaggedData()
+        .then((res)=>setCountProjNotTaggedData(res))
+        .catch((err)=>console.log(err))
+    },[])
   return (
-    <div className="col-md-12 col-lg-12 col-sm-12" style={{background:"white",borderRadius:"20px"}}>
-       <h3 className="m-portlet__head-text" style={{margin:"20px",padding:"24px"}}>Playground</h3>
-        <div className="row" style={{textAlign:"center"}}>
-            <div className="playground-section col-6 col-lg-2 col-md-3" onClick={HandoverRecordOnClick} style={{padding:20}}><img className="playground-image" src={ImageGoogleDoc}/><div>Handover Record</div></div>
-            <div className="playground-section col-6 col-lg-2 col-md-3" onClick={HostingRecordOnClick} style={{padding:20}}><img className="playground-image" src={ImageGoogleDoc}/><div>Hosting Record</div></div>
-            <div className="playground-section col-6 col-lg-2 col-md-3" onClick={HourlyMaintenanceTrackingOnClick} style={{padding:20}}><img className="playground-image" src={ImageGoogleDoc}/><div>Hourly Maintenance Tracking</div></div>
-            <div className="playground-section col-6 col-lg-2 col-md-3" onClick={ReplyTemplateOnClick} style={{padding:20}}><img className="playground-image" src={ImageGoogleDoc}/><div>Reply Template</div></div>
-            <div className="playground-section col-6 col-lg-2 col-md-3" onClick={RenewalRecordOnClick} style={{padding:20}}><img className="playground-image" src={ImageGoogleDoc}/><div>Renewal Record</div></div>
-            <div className="playground-section col-6 col-lg-2 col-md-3" onClick={CustomerEmailRecordOnClick} style={{padding:20}}><img className="playground-image" src={ImageGoogleDoc}/><div>Customer Email Record</div></div>
-            <div className="playground-section col-6 col-lg-2 col-md-3" onClick={ProjectPPTOnClick} style={{padding:20}}><img className="playground-image" src={ImageGoogleDoc}/><div>Project PPT</div></div>
-            <div className="playground-section col-6 col-lg-2 col-md-3" onClick={MaintenanceLDPOnClick} style={{padding:20}}><img className="playground-image" src={ImageGoogleDoc}/><div>Maintenance LDP</div></div>
-        </div>
-     </div>
+    <div style={{backgroundColor:"white",borderRadius:20+"px"}}>
+        <h3 className="m-portlet__head-text" style={{margin:20 +"px",padding:24+"px"}}>Active Maintenance Project Assigned</h3>
+            <div className="custom-table-responsive">
+                <table className="table" style={{margin:20+"px"}}>
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Maintain by</th>
+                            <th scope="col">Count</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                        <tbody>
+                        {
+                            
+                            CountProjNotTaggedData.map((item, key) => {
+                                return (
+                                <tr> 
+                                    <th scope="row">{ key + 1}</th>
+                                    <td>{item.MaintainBy}</td>
+                                    <td>{item.Countproject}</td>
+                                    <td><a className="btn btn-primary editemailbtn" style={{color: 'white'}}>View Projects</a></td>
+                                </tr>
+                                );
+                            })
+                        }
+                    </tbody>
+                </table>
+            </div>
+    </div>
   )
 }
 

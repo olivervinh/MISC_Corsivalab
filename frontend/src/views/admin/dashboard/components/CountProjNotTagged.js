@@ -1,38 +1,39 @@
 import React, { useEffect, useState } from 'react'
 import axiosClient from 'services/api/axiosClient'
-export const CountProjNotTagged = () => {
-    const [CountProjNotTaggedData,setCountProjNotTaggedData] = useState([])
+
+const CountProjNotTagged = () => {
+    const [countnottagged,Setcountnottagged]= useState(null)
     useEffect(()=>{
         async function getCountProjNotTaggedData(){
-            const res = await axiosClient.get('Dashboards/ListProjectCountMaintenance')
+            const res = axiosClient.get("Dashboards/ListProjectsNoPerson")
+            return res
         }
-        getCountProjNotTaggedData().then((res)=>setCountProjNotTaggedData(res))
+        getCountProjNotTaggedData()
+        .then(res=>Setcountnottagged(res))
+        .catch(err=>console.log(err))
     })
   return (
-    <div style={"background-color:white;border-radius:20px;"}>
-        <h3 className="m-portlet__head-text" style={{margin:"20px",padding:"24px"}}>Active Maintenance Project Assigned</h3>
-            <div className="custom-table-responsive">
-                <table className="table" style={"margin:20px"}>
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Maintain by</th>
-                            <th scope="col">Count</th>
-                            <th scope="col">Action</th>
-                        </tr>
-                    </thead>
-                        <tbody>
-                        {CountProjNotTaggedData.map((item)=>{
-                            <tr>
-                                <th scope="row"></th>
-                                <td>{item.MaintainBy}</td>
-                                <td>{item.CountProject}</td>
-                                <td><a className="btn btn-primary editemailbtn" style={{color: 'white'}}>View Projects</a></td>
-                            </tr>
-                        })}
-                    </tbody>
+    <div style={{backgroundColor: "white",marginTop:"24px",borderRadius:"20px"}}>
+        <h3 className="m-portlet__head-text" style={{margin:"20px",padding:"24px",display:'inline-block'}}>Count projects not tagged to any maintenance person </h3>
+        <div className="custom-table-responsive">
+            <table className="table" style={{margin:"20px"}}>
+                <thead>
+                    <tr>
+                        <th style={{width:"33.33%"}} scope="col">#</th>
+                        <th style={{width:"33.33%"}} scope="col">Count</th>
+                        <th style={{width:"33.33%"}} scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>{countnottagged}</td>
+                        <td><a className="btn btn-primary editemailbtn" style={{color: "#ffffff"}}>  View projects</a></td>
+                    </tr>
+                </tbody>
                 </table>
             </div>
+        <div style={{padding:"24px"}}></div>
     </div>
   )
 }

@@ -1,15 +1,18 @@
 import './css/index.css'
-import React from 'react'
-import CountProjNotTagged from './components/CountProjNotTagged'
+import LinkGoogleDoc from './components/LinkGoogleDoc'
 import ActMainProjAssigned from './components/ActMainProjAssigned'
+import CountProjNotTagged from './components/CountProjNotTagged'
 
 function Index() {
+   
   return (
-    <div class="m-portlet__body">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="m-content">
+    <div className="m-portlet__body">
+    <div className="row">
+        <div className="col-md-12">
+            <div className="m-content">
+                <LinkGoogleDoc/>
                 <ActMainProjAssigned/>
+                <CountProjNotTagged/>
             </div>
         </div>
     </div>
