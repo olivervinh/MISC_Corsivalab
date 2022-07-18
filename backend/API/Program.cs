@@ -41,7 +41,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 app.UseCors(options =>
-       options.WithOrigins(ConstantHelper.Fontend_URL)
+       //options.WithOrigins(ConstantHelper.Fontend_URL)
+       options.AllowAnyOrigin()
        .AllowAnyHeader()
        .AllowAnyMethod());
 app.UseHttpsRedirection();
