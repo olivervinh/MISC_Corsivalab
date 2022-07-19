@@ -15,10 +15,10 @@ namespace API.Controllers
         {
             _projectService = projectService;
         }
-        [HttpGet("GetAll")]
-        public async Task<IActionResult> GetAll(int pageNumber, int pageSize)
-        {
-            return Ok(JsonConvert.SerializeObject(await _projectService.PaginatedListProject(pageNumber, pageSize)));
-        }
+        //[HttpGet("GetAll")]
+        //public async Task<IActionResult> GetAll(int pageNumber, int pageSize)
+        //{
+        //    return Ok(JsonConvert.SerializeObject(await _projectService.PaginatedListProject(pageNumber, pageSize)));
+        //}
     }
 }

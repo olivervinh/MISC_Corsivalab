@@ -2,6 +2,7 @@ import './css/index.css'
 import LinkGoogleDoc from './components/LinkGoogleDoc'
 import ActMainProjAssigned from './components/ActMainProjAssigned'
 import CountProjNotTagged from './components/CountProjNotTagged'
+import Expiry120Days from './components/Expiry120Days'
 
 function Index() {
    
@@ -13,6 +14,7 @@ function Index() {
                 <LinkGoogleDoc/>
                 <ActMainProjAssigned/>
                 <CountProjNotTagged/>
+                <Expiry120Days/>
             </div>
         </div>
     </div>

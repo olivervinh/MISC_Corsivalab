@@ -34,24 +34,25 @@ namespace API.Controllers
 
         //Start: Expiry within 120 Days
         [HttpGet("ListProject120Domain")]
-        public async Task<IActionResult> ListProject120Domain(int pageNumber, int pageSize)
+        public async Task<IActionResult> ListProject120Domain(/*int pageNumber, int pageSize*/)
         {
-            return Ok(JsonConvert.SerializeObject(await _projectService.PaginatedListProject120Domain(pageNumber,pageSize)));
+            return Ok(JsonConvert.SerializeObject(await _projectService.ListProject120Domain() /*PaginatedListProject120Domain(pageNumber,pageSize)*/));
         }
         [HttpGet("ListProject120Hosting")]
-        public async Task<IActionResult> ListProject120Hosting(int pageNumber, int pageSize)
+        public async Task<IActionResult> ListProject120Hosting(/*int pageNumber, int pageSize*/)
         {
-            return Ok(JsonConvert.SerializeObject(await _projectService.PaginatedListProject120Hosting(pageNumber,pageSize)));
+            return Ok(JsonConvert.SerializeObject(await _projectService.ListProject120Hosting()/*PaginatedListProject120Hosting(pageNumber,pageSize)*/));
         }
         [HttpGet("ListProject120Email")]
-        public async Task<IActionResult> ListProject120Email(int pageNumber, int pageSize)
+        public async Task<IActionResult> ListProject120Email(/*int pageNumber, int pageSize*/)
         {
-            return Ok(JsonConvert.SerializeObject(await _projectService.PaginatedListProject120Email(pageNumber,pageSize)));
+            return Ok(JsonConvert.SerializeObject(await _projectService.ListProject120Email()/*PaginatedListProject120Email(pageNumber,pageSize)*/));
         }
         [HttpGet("ListProject120Maintenance")]
-        public async Task<IActionResult> ListProject120Maintenance(int pageNumber, int pageSize)
+        public async Task<IActionResult> ListProject120Maintenance(/*int pageNumber, int pageSize*/)
         {
-            return Ok(JsonConvert.SerializeObject(await _projectService.PaginatedListProject120Maintenance(pageNumber,pageSize)));
+            return Ok(JsonConvert.SerializeObject(await _projectService.ListProject120Maintenance()
+                /*PaginatedListProject120Maintenance(pageNumber,pageSize)*/));
         }
         //End: Expiry within 120 Days
     }

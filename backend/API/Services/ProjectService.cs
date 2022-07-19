@@ -10,20 +10,20 @@ namespace API.Services
     public interface IProjectService : IBaseService<Project>
     {
         //IQueryable IEnumrable
-        public Task<IQueryable<Project>> ListProject120Domain();
-        public Task<IQueryable<Project>> ListProject120Hosting();
-        public Task<IQueryable<Project>> ListProject120Email();
-        public Task<IQueryable<Project>> ListProject120Maintenance();
+        public Task<ICollection<Project>> ListProject120Domain();
+        public Task<ICollection<Project>> ListProject120Hosting();
+        public Task<ICollection<Project>> ListProject120Email();
+        public Task<ICollection<Project>> ListProject120Maintenance();
         public Task<IEnumerable<CountProjectDto>> ListProjectCountMaintenance();
         public Task<int> ListProjectsNoPerson();
         //IQueryable IEnumrable
 
         //Paginated
-        public Task<PaginatedListHelper<Project>> PaginatedListProject(int pageNumber, int pageSize);
-        public Task<PaginatedListHelper<Project>> PaginatedListProject120Domain(int pageNumber, int pageSize);
-        public Task<PaginatedListHelper<Project>> PaginatedListProject120Hosting(int pageNumber, int pageSize);
-        public Task<PaginatedListHelper<Project>> PaginatedListProject120Email(int pageNumber, int pageSize);
-        public Task<PaginatedListHelper<Project>> PaginatedListProject120Maintenance(int pageNumber, int pageSize);
+        //public Task<PaginatedListHelper<Project>> PaginatedListProject(int pageNumber, int pageSize);
+        //public Task<PaginatedListHelper<Project>> PaginatedListProject120Domain(int pageNumber, int pageSize);
+        //public Task<PaginatedListHelper<Project>> PaginatedListProject120Hosting(int pageNumber, int pageSize);
+        //public Task<PaginatedListHelper<Project>> PaginatedListProject120Email(int pageNumber, int pageSize);
+        //public Task<PaginatedListHelper<Project>> PaginatedListProject120Maintenance(int pageNumber, int pageSize);
         //Paginated
 
         //be call
@@ -42,7 +42,7 @@ namespace API.Services
                   .Where(x => x.MaintainBy == "-" || x.MaintainBy == "0" && x.Phase == 3 && x.SoftDelete == false)
                   .CountAsync();
         }
-        public async Task<IQueryable<Project>> ListProject120Domain()
+        public async Task<ICollection<Project>> ListProject120Domain()
         {
             var listProject120Domain = new List<Project>();
             var domainListWithoutCustomer = _context.ProjectDomains.Where(x => x.Owner == 1 && x.SoftDelete == false);
@@ -61,9 +61,9 @@ namespace API.Services
                     }
                 }
             }
-            return (IQueryable<Project>)listProject120Domain;
+            return listProject120Domain;
         }
-        public async Task<IQueryable<Project>> ListProject120Hosting()
+        public async Task<ICollection<Project>> ListProject120Hosting()
         {
             var listProject120Hosting = new List<Project>();
             var hostingListWithoutCustomer = _context.ProjectHostings.Where(x => x.Owner == 1 && x.SoftDelete == false);
@@ -82,9 +82,9 @@ namespace API.Services
                     }
                 }
             }
-            return (IQueryable<Project>)listProject120Hosting;
+            return listProject120Hosting;
         }
-        public async Task<IQueryable<Project>> ListProject120Email()
+        public async Task<ICollection<Project>> ListProject120Email()
         {
             var listProject120Email = new List<Project>();
             var emailListWithoutCustomer = _context.ProjectEmailSystems.Where(x => x.Owner == 1 && x.SoftDelete == false);
@@ -103,9 +103,9 @@ namespace API.Services
                     }
                 }
             }
-            return (IQueryable<Project>)listProject120Email;
+            return listProject120Email;
         }
-        public async Task<IQueryable<Project>> ListProject120Maintenance()
+        public async Task<ICollection<Project>> ListProject120Maintenance()
         {
             var listProject120Maintenance = new List<Project>();
             var maintenanceListWithoutCustomer = _context.ProjectMonthlyMaintenances;
@@ -124,7 +124,7 @@ namespace API.Services
                     }
                 }
             }
-            return (IQueryable<Project>)listProject120Maintenance;
+            return listProject120Maintenance;
         }
         public async Task<Project> GetProjectByFirstVariableDashboardViewModel(int Id, string expiry_date)
         {
@@ -164,30 +164,30 @@ namespace API.Services
                }).ToListAsync();
         }
 
-        public async Task<PaginatedListHelper<Project>> PaginatedListProject(int pageNumber,int pageSize)
-        {
-            return await PaginatedListHelper<Project>.CreateAsync(_context.Projects.AsNoTracking(), pageNumber != null ? pageNumber : 1, pageSize);
-        }
+        //public async Task<PaginatedListHelper<Project>> PaginatedListProject(int pageNumber,int pageSize)
+        //{
+        //    return await PaginatedListHelper<Project>.CreateAsync(_context.Projects.AsNoTracking(), pageNumber != null ? pageNumber : 1, pageSize);
+        //}
 
-        public async Task<PaginatedListHelper<Project>> PaginatedListProject120Domain(int pageNumber, int pageSize)
-        {
-            return await PaginatedListHelper<Project>.CreateAsync(await ListProject120Domain(), pageNumber != null ? pageNumber : 1, pageSize);
-        }
+        //public async Task<PaginatedListHelper<Project>> PaginatedListProject120Domain(int pageNumber, int pageSize)
+        //{
+        //    return await PaginatedListHelper<Project>.CreateAsync(await ListProject120Domain(), pageNumber != null ? pageNumber : 1, pageSize);
+        //}
 
-        public async Task<PaginatedListHelper<Project>> PaginatedListProject120Hosting(int pageNumber, int pageSize)
-        {
-            return await PaginatedListHelper<Project>.CreateAsync(await ListProject120Hosting(), pageNumber != null ? pageNumber : 1, pageSize);
-        }
+        //public async Task<PaginatedListHelper<Project>> PaginatedListProject120Hosting(int pageNumber, int pageSize)
+        //{
+        //    return await PaginatedListHelper<Project>.CreateAsync(await ListProject120Hosting(), pageNumber != null ? pageNumber : 1, pageSize);
+        //}
 
-        public async Task<PaginatedListHelper<Project>> PaginatedListProject120Email(int pageNumber, int pageSize)
-        {
-            return await PaginatedListHelper<Project>.CreateAsync(await ListProject120Email(), pageNumber != null ? pageNumber : 1, pageSize);
-        }
+        //public async Task<PaginatedListHelper<Project>> PaginatedListProject120Email(int pageNumber, int pageSize)
+        //{
+        //    return await PaginatedListHelper<Project>.CreateAsync(await ListProject120Email(), pageNumber != null ? pageNumber : 1, pageSize);
+        //}
 
-        public async Task<PaginatedListHelper<Project>> PaginatedListProject120Maintenance(int pageNumber, int pageSize)
-        {
-            return await PaginatedListHelper<Project>.CreateAsync(await ListProject120Maintenance(), pageNumber != null ? pageNumber : 1, pageSize);
-        }
+        //public async Task<PaginatedListHelper<Project>> PaginatedListProject120Maintenance(int pageNumber, int pageSize)
+        //{
+        //    return await PaginatedListHelper<Project>.CreateAsync(await ListProject120Maintenance(), pageNumber != null ? pageNumber : 1, pageSize);
+        //}
 
         public async Task<int> ListProjectsNoPerson()
         {
