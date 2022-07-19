@@ -12,18 +12,14 @@ namespace API.Helpers
             var hashBytes = System.Security.Cryptography.MD5.Create().ComputeHash(bytes);
             return Convert.ToBase64String(hashBytes);
         }
-
         public static string Hashwithtime(string input)
         {
             MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
-
             input = DateTime.Now.ToString() + input;
             byte[] originalBytes = ASCIIEncoding.Default.GetBytes(input);
             byte[] encodedBytes = md5.ComputeHash(originalBytes);
-
             return BitConverter.ToString(encodedBytes).Replace("-", "").Replace("y", "e").Replace("r", "c");
         }
-
         public static class CryptoEncryptDecrupt
         {
             static readonly char[] padding = { '=' };
@@ -52,11 +48,9 @@ namespace API.Helpers
                 }
                 catch
                 {
-
                 }
                 return "";
             }
-
             public static string Decrypt(string cipherText)
             {
                 string incoming = cipherText.Replace('_', '/').Replace('-', '+');
@@ -88,7 +82,6 @@ namespace API.Helpers
                 }
                 catch
                 {
-
                 }
                 return "";
             }
