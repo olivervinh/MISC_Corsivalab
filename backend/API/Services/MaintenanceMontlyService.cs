@@ -31,6 +31,9 @@ namespace API.Services
                             Project = p,
                             FkProjectId = m.FkProjectId,
                             SoftDelete = m.SoftDelete,
+                            ProjectNature = TupleHelper.GetProjectNature(m.Id),
+                            CustomerName = c.Company,
+                            ProjectTitle = p.Title,
                         };
 
             //check condition

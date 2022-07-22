@@ -2,6 +2,7 @@
 using API.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace API.Controllers
 {
@@ -19,12 +20,13 @@ namespace API.Controllers
         [HttpGet("GetMaintenanceMontlies")]
         public async Task<IActionResult> GetMaintenanceMontlies()
         {
-            return Ok(await _maintenanceMontlyService.GetMaintenanceMontlies());
+            return Ok(JsonConvert.SerializeObject(await _maintenanceMontlyService.GetMaintenanceMontlies()));
         }
         [HttpGet("GetMaintenanceHourly")]
         public async Task<IActionResult> GetMaintenanceHourly() 
         {
-            return Ok(await _maintenanceHourlyService.GetMaintenanceHourlies());
+            var res = await _maintenanceHourlyService.GetMaintenanceHourlies();
+            return Ok(JsonConvert.SerializeObject(res));
         }
     }
 }

@@ -6,7 +6,6 @@ namespace API.Services
 {
     public interface IEmailSystemService:IBaseService<EmailSystem>
     {
-
     }
     public class EmailSystemService : BaseService<EmailSystem>, IEmailSystemService
     {

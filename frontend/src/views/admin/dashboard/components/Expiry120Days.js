@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import axiosClient from 'services/api/axiosClient';
-
+import moment from 'moment'
 const Expiry120Days = () => {
   //tab domain
   const [domain,setDomain] = useState([])
@@ -63,7 +63,7 @@ const Expiry120Days = () => {
     defaultActiveKey="profile"
     id="uncontrolled-tab-example"
     className="mb-3"
-  >
+    >
     <Tab eventKey="domain" title="Domain">
     <div className="custom-table-responsive">
                 <table className="table" style={{margin:20+"px"}}>
@@ -84,9 +84,9 @@ const Expiry120Days = () => {
                                 <tr> 
                                     <th scope="row">{ key + 1}</th>
                                     <td>{item.Title}</td>
-                                    <td>{item.Customer}</td>
+                                    <td>{item.CustomerName}</td>
                                     <td>{item.MaintainBy}</td>
-                                    <td>{item.Expiry}</td>
+                                    <td>{moment(item.ExpiryDashboardView).format('LL')}</td>
                                     <td>Action</td>
                                 </tr>
                                 );
@@ -111,14 +111,14 @@ const Expiry120Days = () => {
                     </thead>
                         <tbody>
                         {
-                            domain.map((item, key) => {
+                            hosting.map((item, key) => {
                                 return (
                                 <tr> 
                                     <th scope="row">{ key + 1}</th>
                                     <td>{item.Title}</td>
-                                    <td>{item.Customer}</td>
+                                    <td>{item.CustomerName}</td>
                                     <td>{item.MaintainBy}</td>
-                                    <td>{item.Expiry}</td>
+                                    <td>{moment(item.ExpiryDashboardView).format('LL')}</td>
                                     <td>Action</td>
                                 </tr>
                                 );
@@ -143,14 +143,14 @@ const Expiry120Days = () => {
                     </thead>
                         <tbody>
                         {
-                            domain.map((item, key) => {
+                            emailSystem.map((item, key) => {
                                 return (
                                 <tr> 
                                     <th scope="row">{ key + 1}</th>
                                     <td>{item.Title}</td>
-                                    <td>{item.Customer}</td>
+                                    <td>{item.CustomerName}</td>
                                     <td>{item.MaintainBy}</td>
-                                    <td>{item.Expiry}</td>
+                                    <td>{moment(item.ExpiryDashboardView).format('LL')}</td>
                                     <td>Action</td>
                                 </tr>
                                 );
@@ -175,14 +175,14 @@ const Expiry120Days = () => {
                     </thead>
                         <tbody>
                         {
-                            domain.map((item, key) => {
+                            maintenance.map((item, key) => {
                                 return (
                                 <tr> 
                                     <th scope="row">{ key + 1}</th>
                                     <td>{item.Title}</td>
-                                    <td>{item.Customer}</td>
+                                    <td>{item.CustomerName}</td>
                                     <td>{item.MaintainBy}</td>
-                                    <td>{item.Expiry}</td>
+                                    <td>{moment(item.ExpiryDashboardView).format('LL')}</td>
                                     <td>Action</td>
                                 </tr>
                                 );

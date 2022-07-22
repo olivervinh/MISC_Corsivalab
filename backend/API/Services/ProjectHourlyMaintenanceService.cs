@@ -6,7 +6,6 @@ namespace API.Services
 {
     public interface IProjectHourlyMaintenanceService : IBaseService<ProjectHourlyMaintenance>
     {
-
     }
     public class ProjectHourlyMaintenanceService : BaseService<ProjectHourlyMaintenance>, IProjectHourlyMaintenanceService
     {

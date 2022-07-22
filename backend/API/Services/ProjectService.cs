@@ -47,7 +47,7 @@ namespace API.Services
             var listProject120Domain = new List<Project>();
             var domainListWithoutCustomer = _context.ProjectDomains.Where(x => x.Owner == 1 && x.SoftDelete == false);
             var domainListNewest = await domainListWithoutCustomer
-                .OrderBy(s=>s.Id)
+                .OrderByDescending(s=>s.Id)
                 .GroupBy(s => s.FkProjectId)
                 .Select(s => s.FirstOrDefault())
                 .ToListAsync();
@@ -61,14 +61,14 @@ namespace API.Services
                     }
                 }
             }
-            return listProject120Domain;
+            return listProject120Domain.OrderBy(x => x.ExpiryDashboardView).ToList();
         }
         public async Task<ICollection<Project>> ListProject120Hosting()
         {
             var listProject120Hosting = new List<Project>();
             var hostingListWithoutCustomer = _context.ProjectHostings.Where(x => x.Owner == 1 && x.SoftDelete == false);
             var hostingListNewest = await hostingListWithoutCustomer
-                .OrderBy(s=>s.Id)
+                .OrderByDescending(s=>s.Id)
                 .GroupBy(s => s.FkProjectId)
                 .Select(s => s.FirstOrDefault())
                 .ToListAsync();
@@ -82,14 +82,14 @@ namespace API.Services
                     }
                 }
             }
-            return listProject120Hosting;
+            return listProject120Hosting.OrderBy(x => x.ExpiryDashboardView).ToList();
         }
         public async Task<ICollection<Project>> ListProject120Email()
         {
             var listProject120Email = new List<Project>();
             var emailListWithoutCustomer = _context.ProjectEmailSystems.Where(x => x.Owner == 1 && x.SoftDelete == false);
             var emailListNewest = await emailListWithoutCustomer
-                .OrderBy(s => s.Id)
+                .OrderByDescending(s => s.Id)
                 .GroupBy(s => s.FkProjectId)
                 .Select(s => s.FirstOrDefault())
                 .ToListAsync();
@@ -103,14 +103,14 @@ namespace API.Services
                     }
                 }
             }
-            return listProject120Email;
+            return listProject120Email.OrderBy(x => x.ExpiryDashboardView).ToList();
         }
         public async Task<ICollection<Project>> ListProject120Maintenance()
         {
             var listProject120Maintenance = new List<Project>();
             var maintenanceListWithoutCustomer = _context.ProjectMonthlyMaintenances;
             var maintenanceListNewest = await maintenanceListWithoutCustomer
-                .OrderBy(s=>s.Id)
+                .OrderByDescending(s=>s.Id)
                 .GroupBy(s => s.FkProjectId)
                 .Select(s => s.FirstOrDefault())
                 .ToListAsync();
@@ -124,7 +124,11 @@ namespace API.Services
                     }
                 }
             }
-            return listProject120Maintenance;
+            return listProject120Maintenance.OrderBy(x => x.ExpiryDashboardView).ToList();
+        }
+        public async Task<Customer> GetCustomerAsync(int Id)
+        {
+            return await _context.Customers.FindAsync(Id);
         }
         public async Task<Project> GetProjectByFirstVariableDashboardViewModel(int Id, string expiry_date)
         {
@@ -149,6 +153,7 @@ namespace API.Services
                 ForecastStart = project.ForecastStart,
                 ForecastAmount = project.ForecastAmount,
                 ExpiryDashboardView = Convert.ToDateTime(expiry_date),
+                CustomerName = (await GetCustomerAsync((int)project.FkCustomerId)).Email,
             };
             return newProject;
         }
@@ -188,7 +193,6 @@ namespace API.Services
         //{
         //    return await PaginatedListHelper<Project>.CreateAsync(await ListProject120Maintenance(), pageNumber != null ? pageNumber : 1, pageSize);
         //}
-
         public async Task<int> ListProjectsNoPerson()
         {
             return await _context.Projects.Where(x => x.SoftDelete==false&& x.MaintainBy == "-" || x.MaintainBy == "0" && x.Phase == 3).CountAsync();

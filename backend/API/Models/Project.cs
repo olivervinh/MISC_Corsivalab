@@ -92,5 +92,7 @@ namespace API.Models
         //public virtual ICollection<ProjectMonthlyMaintenance> ProjectMonthlyMaintenances { get; set; }
         //public virtual ICollection<StaffCredentialRequest> StaffCredentialRequests { get; set; }
         //public virtual ICollection<Ticket> Tickets { get; set; }
+        [NotMapped]
+        public string CustomerName { get; set; }
     }
 }

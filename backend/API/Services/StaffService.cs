@@ -51,6 +51,7 @@ namespace API.Services
             {
                 case "200":
                     var staffObject = await GetStaffByID(aResponse.responseObject, tResponse.access_token);
+                    StaticHelper.StaffTeam = staffObject.Team;
                     return new ResponseClass()
                     {
                         responseCode = 200,

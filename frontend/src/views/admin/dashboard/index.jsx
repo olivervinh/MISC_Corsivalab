@@ -7,7 +7,7 @@ import Expiry120Days from './components/Expiry120Days'
 function Index() {
    
   return (
-    <div className="m-portlet__body">
+    <div className="m-portlet__body"style={{marginTop:130+"px"}}>
     <div className="row">
         <div className="col-md-12">
             <div className="m-content">

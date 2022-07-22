@@ -6,7 +6,6 @@ namespace API.Services
 {
     public interface IProjectCredentialLogService : IBaseService<ProjectCredentialLog>
     {
-
     }
     public class ProjectCredentialLogService : BaseService<ProjectCredentialLog>,IProjectCredentialLogService
     {

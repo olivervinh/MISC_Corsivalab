@@ -32,6 +32,7 @@ services.AddScoped<ITechnologyUsedService, TechnologyUsedService>();
 services.AddScoped<ITicketImageService, TicketImageService>();
 services.AddScoped<ITicketReplyService, TicketReplyService>();
 services.AddScoped<ITicketService, TicketService>();
+services.AddScoped<IAtaglancesService, AtaglancesService>();
 # endregion
 services.AddCors();
 var app = builder.Build();

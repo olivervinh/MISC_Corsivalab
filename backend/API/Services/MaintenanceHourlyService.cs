@@ -12,29 +12,45 @@ namespace API.Services
     }
     public class MaintenanceHourlyService : BaseService<MaintenanceHourly>,IMaintenanceHourlyService
     {
-        public MaintenanceHourlyService(AppDbContext context,ICustomerService customerService,IProjectService projectService) : base(context)
+        private readonly IProjectService _projectService;
+        public MaintenanceHourlyService(AppDbContext context, ICustomerService customerService,IProjectService projectService) : base(context)
         {
+            _projectService = projectService;
         }
         public async Task<IEnumerable<MaintenanceHourly>> GetMaintenanceHourlies()
         {
-            //join
             var query = from m in _context.MaintenanceHourlies
-                        join p in _context.Projects
-                        on m.FkProjectId equals p.Id
-                        join c in _context.Customers
-                        on p.FkCustomerId equals c.Id
-                        select new MaintenanceHourly
+                        select new MaintenanceHourly()
                         {
                             Id = m.Id,
-                            ExpiryTime = m.ExpiryTime,
-                            FkProjectId = m.FkProjectId,
                             ServiceHourLeft = m.ServiceHourLeft,
-                            Project = p,
-                            Customer = c,
-                            SoftDelete = m.SoftDelete,
+                            FkProjectId = m.FkProjectId,
+                            ExpiryTime = m.ExpiryTime,
+                            Project =  _projectService.GetByFirstVariable(m.FkProjectId).Result,
                         };
-            //list
-            return await query.OrderBy(x=>x.Customer.Company).ToListAsync();
+            return await query.ToListAsync();
+            ////join
+            //var query = from m in _context.Projects
+            //            join p in _context.MaintenanceHourlies
+            //            on m.Id equals p.FkProjectId
+            //            into ps
+            //            from p in ps.DefaultIfEmpty()
+            //            join c in _context.Customers
+            //            on m.FkCustomerId equals c.Id
+            //            into c2
+            //            from c in c2.DefaultIfEmpty()
+            //            select new MaintenanceHourly
+            //            {
+            //                Id = p.Id,
+            //                ExpiryTime = p.ExpiryTime,
+            //                FkProjectId = p.FkProjectId,
+            //                ServiceHourLeft = p.ServiceHourLeft,
+            //                Project = m,
+            //                Customer = c,
+            //                SoftDelete = m.SoftDelete,
+            //            };
+            ////list
+            //return await query.OrderBy(x=>x.Customer.Company).ToListAsync();
         }
     }
 }

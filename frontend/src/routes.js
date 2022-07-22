@@ -16,6 +16,10 @@ import Profile from "views/admin/profile";
 import DataTables from "views/admin/dataTables";
 import RTL from "views/admin/rtl";
 import Dashboard from "views/admin/dashboard";
+import Project from "views/admin/projects";
+import Customer from "views/admin/customer";
+import Maintenance from "views/admin/maintenance";
+import Ataglance from "views/admin/ataglance";
 // Auth Imports
 import SignInCentered from "views/auth/signIn";
 
@@ -26,6 +30,34 @@ const routes = [
     path: "/dashboard",
     icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
     component: Dashboard,
+  },
+  {
+    name:"Project",
+    layout:"/admin",
+    path:"/project",
+    icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
+    component:Project
+  },
+  {
+    name:"Customer",
+    layout:"/admin",
+    path:"/customer",
+    icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
+    component:Customer
+  },
+  {
+    name:"Maintenance",
+    layout:"/admin",
+    path:"/maintenance",
+    icon: <Icon as={MdHome} width='20px' height='20px' color='inherit' />,
+    component:Maintenance
+  },
+  {
+    name:"Ataglance",
+    layout:"/admin",
+    path:"/ataglance",
+    icon:<Icon as={MdHome} width='20px' height='20px' color='inherit'/>,
+    component:Ataglance
   },
   {
     name: "Main Dashboard",

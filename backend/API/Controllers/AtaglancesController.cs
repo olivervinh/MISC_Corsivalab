@@ -1,6 +1,7 @@
 ﻿using API.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace API.Controllers
 {
@@ -12,6 +13,11 @@ namespace API.Controllers
         public AtaglancesController(IAtaglancesService ataglancesService)
         {
             _ataglancesService = ataglancesService;
+        }
+        [HttpGet("CountProjectList")]
+        public async Task<IActionResult> CountProjectList()
+        {
+            return Ok(JsonConvert.SerializeObject(await _ataglancesService.CountProjectList()));
         }
         [HttpGet("TotalForecast2020")]
         public async Task<IActionResult> TotalForecast2020()
