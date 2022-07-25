@@ -7,175 +7,295 @@ namespace API.Services
 {
     public interface IAtaglancesService
     {
-        public Task<Dictionary<string, double>> domainProviderCostList();
-        public Task<Dictionary<string, double>> hostingProviderCostList();
-        public Task<Dictionary<string, double>> emailProviderCostList();
-        public double totalMaintCostPerMonth();
-        public double totalDomainCostPerMonth();
-        public double totalHostCostPerMonth();
-        public double totalEmailCostPerMonth();
+        //1
         public Task<int> CountProjectList();
-        public IEnumerable<ProjectProjectMonthlyMaintenanceDto> QueryMantenaces();
-        public Task<long> TotalForecast2020();
-        public Task<long> TotalConfirm2020();
-        public Task<long> TotalForecast2021();
-        public Task<long> TotalConfirm2021();
-        public Task<long> TotalForecast2022();
-        public Task<long> TotalConfirm2022();
-        public Task<long> TotalForecast2023();
-        public Task<long> TotalConfirm2023();
+        //1
+
+        //2
+        public Task<TotalAndDomainRevenueBreakdownDto> TotalAndDomainRevenueBreakdownList();
+        public Task<TotalAndHostingRevenueBreakdownDto> TotalAndHostingRevenueBreakdownList();
+        public Task<TotalAndEmailRevenueBreakdownDto> TotalAndEmailRevenueBreakdownList();
+        //2
+
+        //3
+        //3
     }
     public class AtaglancesService : IAtaglancesService
     {
         private readonly AppDbContext _context;
         private readonly IProjectService _projectService;
-        public AtaglancesService(AppDbContext context, IProjectService projectService)
+        private readonly IProjectDomainService _projectDomainService;
+        private readonly IProjectHostingService _projectHostingService;
+        private readonly IProjectEmailSystemService _projectEmailSystemService;
+        public AtaglancesService(
+            AppDbContext context,
+            IProjectService projectService,
+            IProjectDomainService projectDomainService,
+            IProjectHostingService projectHostingService,
+            IProjectEmailSystemService projectEmailSystemService
+            )
         {
             _context = context;
             _projectService = projectService;
+            _projectDomainService = projectDomainService;
+            _projectHostingService = projectHostingService;
+            _projectEmailSystemService = projectEmailSystemService;
         }
         public async Task<int> CountProjectList()
         {
             return await _context.Projects.Where(x => x.Phase == 3 || x.Phase == 4).CountAsync();
         }
-        public async Task<Dictionary<string, double>> domainProviderCostList()
+        public async Task<TotalAndDomainRevenueBreakdownDto> TotalAndDomainRevenueBreakdownList()
         {
-            throw new NotImplementedException();
-            //var projectList = await _projectService.GetAll();
-            //foreach(var project in projectList)
-            //{
-            //    if (project.MaintCost != "0/Month" && string.IsNullOrEmpty(project.MaintCost))
-            //    {
-            //        string frequency = project.MaintCost.Split('/')[1];
-            //        double maintCost = double.Parse(project.MaintCost.Split('/')[0]);
-            //        switch (frequency)
-            //        {
-            //            case "Quarter":
-            //                maintCost /= 3;
-            //                break;
-            //            case "Bi-annual":
-            //                maintCost /= 6;
-            //                break;
-            //            case "Annual":
-            //                maintCost /= 12;
-            //                break;
-            //        }
+            //set list temp
+            var tempList = new List<BreakdownDto>();
 
-            //    }
-            //}
-        }
-        public async Task<Dictionary<string, double>> emailProviderCostList()
-        {
-            throw new NotImplementedException();
-        }
-        public async Task<Dictionary<string, double>> hostingProviderCostList()
-        {
-            throw new NotImplementedException();
-        }
-        public IEnumerable<ProjectProjectMonthlyMaintenanceDto> QueryMantenaces()
-        {
-          return from p in _context.Projects
-                        join m in _context.ProjectMonthlyMaintenances
-                      on p.Id equals m.FkProjectId into ps
-                 from a in ps.DefaultIfEmpty()
-                 select new ProjectProjectMonthlyMaintenanceDto { project=p,projectMonthlyMaintenance= a };
-        }
-        public async Task<long> TotalConfirm2020()
-        {
-            return QueryMantenaces().Where(s => s.project.MaintExpire.ToString().Contains("2020")).Sum(s =>
+            //new model
+            TotalAndDomainRevenueBreakdownDto model = new TotalAndDomainRevenueBreakdownDto();
+
+            //init Dicre
+            model.domainRevenueBreakdownIColection = new List<BreakdownDto>();
+
+             //get all doamin provider list 
+             var domainProviderList = await _context.DomainProviders.ToListAsync();
+
+            //get all project
+            var projects = await _projectService.GetAll();
+
+            foreach (var project in projects)
             {
-                return Helper.CheckObjNull(s.projectMonthlyMaintenance) == true ? s.projectMonthlyMaintenance.Amount : 0;
-            });
+                //Maintenance Cost
+                if (project.MaintCost != "0/Month" && !string.IsNullOrEmpty(project.MaintCost))
+                {
+                    string frequency = project.MaintCost.Split('/')[1];
+                    double mainCost = double.Parse(project.MaintCost.Split('/')[0]);
+                    switch (frequency)
+                    {
+                        case "Quarter":
+                            mainCost /= 3;
+                            break;
+                        case "Bi-annual":
+                            mainCost /= 6;
+                            break;
+                        case "Annual":
+                            mainCost /= 12;
+                            break;
+                    }
+                }
+                var domains = await _projectDomainService.GetAll();
+                if (domains.Count() > 0)
+                {
+                    foreach (var domain in domains)
+                    {
+                        foreach (var provider in domainProviderList)
+                        {
+                            if (domain.Provider == provider.Id)
+                            {
+                                string frequency = domain.Cost.Split('/')[1];
+                                double domainCost = double.Parse(domain.Cost.Split('/')[0]);
+
+                                switch (frequency)
+                                {
+                                    case "Quarter":
+                                        domainCost /= 3;
+                                        break;
+                                    case "Bi-annual":
+                                        domainCost /= 6;
+                                        break;
+                                    case "Annual":
+                                        domainCost /= 12;
+                                        break;
+                                }
+                                model.Total += domainCost;
+                                var dto = new BreakdownDto();
+                                dto.Key = provider.Name;
+                                dto.Value = domainCost;
+                                tempList.Add(dto);
+                            }
+                        }
+
+                    }
+                }
+            }
+            model.domainRevenueBreakdownIColection = tempList
+                                    .GroupBy(x => x.Key)
+                                    .Select(x => new BreakdownDto()
+                                    {
+                                        Key = x.FirstOrDefault().Key,
+                                        Value = x.Sum(s => s.Value),
+                                    })
+                                    .ToList();
+            return model;
         }
-        public async Task<long> TotalConfirm2021()
+
+        public async Task<TotalAndEmailRevenueBreakdownDto> TotalAndEmailRevenueBreakdownList()
         {
-            return QueryMantenaces().Where(s => s.project.MaintExpire.ToString().Contains("2021")).Sum(s =>
+            //set list temp
+            var tempList = new List<BreakdownDto>();
+
+            //new model
+            TotalAndEmailRevenueBreakdownDto model = new TotalAndEmailRevenueBreakdownDto();
+
+            //init Dicre
+            model.emailRevenueBreakdownIColection = new List<BreakdownDto>();
+
+            //get all email provider list 
+            var projectEmailSystems = await _context.ProjectEmailSystems.ToListAsync();
+
+            //get all project
+            var projects = await _projectService.GetAll();
+
+            //
+            var emailList = await _context.EmailSystems.ToListAsync();
+
+            foreach (var project in projects)
             {
-                return Helper.CheckObjNull(s.projectMonthlyMaintenance) == true ? s.projectMonthlyMaintenance.Amount : 0;
-            });
+                //Maintenance Cost
+                if (project.MaintCost != "0/Month" && !string.IsNullOrEmpty(project.MaintCost))
+                {
+                    string frequency = project.MaintCost.Split('/')[1];
+                    double mainCost = double.Parse(project.MaintCost.Split('/')[0]);
+                    switch (frequency)
+                    {
+                        case "Quarter":
+                            mainCost /= 3;
+                            break;
+                        case "Bi-annual":
+                            mainCost /= 6;
+                            break;
+                        case "Annual":
+                            mainCost /= 12;
+                            break;
+                    }
+                }
+                var emailSysProjectList = await _context.ProjectEmailSystems.ToListAsync();
+                if (tempList.Count > 0)
+                {
+                    foreach (var email in emailSysProjectList)
+                    {
+                        foreach (var provider in emailList)
+                        {
+                            if (email.Provider == provider.Id)
+                            {
+                                string frequency = email.Cost.Split('/')[1];
+                                double emailCost = double.Parse(email.Cost.Split('/')[0]);
+
+                                switch (frequency)
+                                {
+                                    case "Quarter":
+                                        emailCost /= 3;
+                                        break;
+                                    case "Bi-annual":
+                                        emailCost /= 6;
+                                        break;
+                                    case "Annual":
+                                        emailCost /= 12;
+                                        break;
+                                }
+                                model.Total += emailCost;
+                                var dto = new BreakdownDto();
+                                dto.Key = provider.EmailSystemName;
+                                dto.Value = emailCost;
+                                tempList.Add(dto);
+                            }
+                        }
+                    }
+                }
+            }
+            model.emailRevenueBreakdownIColection = tempList
+                                    .GroupBy(x => x.Key)
+                                    .Select(x => new BreakdownDto()
+                                    {
+                                        Key = x.FirstOrDefault().Key,
+                                        Value = x.Sum(s => s.Value),
+                                    })
+                                    .ToList();
+            return model;
         }
-        public async Task<long> TotalConfirm2022()
+
+        public async Task<TotalAndHostingRevenueBreakdownDto> TotalAndHostingRevenueBreakdownList()
         {
-            return QueryMantenaces().Where(s => s.project.MaintExpire.ToString().Contains("2022")).Sum(s =>
+            //set list temp
+            var tempList = new List<BreakdownDto>();
+
+            //new model
+            TotalAndEmailRevenueBreakdownDto model = new TotalAndEmailRevenueBreakdownDto();
+
+            //init Dicre
+            model.emailRevenueBreakdownIColection = new List<BreakdownDto>();
+
+            //get all email provider list 
+            var projectEmailSystems = await _context.ProjectEmailSystems.ToListAsync();
+
+            //get all project
+            var projects = await _projectService.GetAll();
+
+            //
+            var emailList = await _context.EmailSystems.ToListAsync();
+
+            foreach (var project in projects)
             {
-                return Helper.CheckObjNull(s.projectMonthlyMaintenance) == true ? s.projectMonthlyMaintenance.Amount : 0;
-            });
-        }
-        public async Task<long> TotalConfirm2023()
-        {
-            return QueryMantenaces().Where(s => s.project.MaintExpire.ToString().Contains("2023")).Sum(s =>
-            {
-                return Helper.CheckObjNull(s.projectMonthlyMaintenance) == true ? s.projectMonthlyMaintenance.Amount : 0;
-            });
-        }
+                //Maintenance Cost
+                if (project.MaintCost != "0/Month" && !string.IsNullOrEmpty(project.MaintCost))
+                {
+                    string frequency = project.MaintCost.Split('/')[1];
+                    double mainCost = double.Parse(project.MaintCost.Split('/')[0]);
+                    switch (frequency)
+                    {
+                        case "Quarter":
+                            mainCost /= 3;
+                            break;
+                        case "Bi-annual":
+                            mainCost /= 6;
+                            break;
+                        case "Annual":
+                            mainCost /= 12;
+                            break;
+                    }
+                }
+                var emailSysProjectList = await _context.ProjectEmailSystems.ToListAsync();
+                if (tempList.Count > 0)
+                {
+                    foreach (var email in emailSysProjectList)
+                    {
+                        foreach (var provider in emailList)
+                        {
+                            if (email.Provider == provider.Id)
+                            {
+                                string frequency = email.Cost.Split('/')[1];
+                                double emailCost = double.Parse(email.Cost.Split('/')[0]);
 
-        public Task<double> totalDomainCostPerMonth()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<double> totalEmailCostPerMonth()
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<long> TotalForecast2020()
-        {
-            return QueryMantenaces().Where(s => s.project.MaintExpire.ToString().Contains("2020")).Sum(s =>
-            {
-                return long.Parse(Helper.IsDigitsOnly(s.project.ForecastAmount) == true ? s.project.ForecastAmount : "0");
-            });
-        }
-        public async Task<long> TotalForecast2021()
-        {
-            return QueryMantenaces().Where(s => s.project.MaintExpire.ToString().Contains("2021")).Sum(s =>
-            {
-                return long.Parse(Helper.IsDigitsOnly(s.project.ForecastAmount) == true ? s.project.ForecastAmount : "0");
-            });
-        }
-        public async Task<long> TotalForecast2022()
-        {
-            return QueryMantenaces().Where(s => s.project.MaintExpire.ToString().Contains("2022")).Sum(s =>
-            {
-               return long.Parse(Helper.IsDigitsOnly(s.project.ForecastAmount) == true ? s.project.ForecastAmount : "0");
-            });
-        }
-        public async Task<long> TotalForecast2023()
-        {
-            return QueryMantenaces().Where(s => s.project.MaintExpire.ToString().Contains("2023")).Sum(s =>
-            {
-                return long.Parse(Helper.IsDigitsOnly(s.project.ForecastAmount) == true ? s.project.ForecastAmount : "0");
-            });
-        }
-
-        public Task<double> totalHostCostPerMonth()
-        {
-            throw new NotImplementedException();
-        }
-
-        public double totalMaintCostPerMonth(double value)
-        {
-            return value;
-        }
-
-        public double totalMaintCostPerMonth()
-        {
-            throw new NotImplementedException();
-        }
-
-        double IAtaglancesService.totalDomainCostPerMonth()
-        {
-            throw new NotImplementedException();
-        }
-
-        double IAtaglancesService.totalEmailCostPerMonth()
-        {
-            throw new NotImplementedException();
-        }
-
-        double IAtaglancesService.totalHostCostPerMonth()
-        {
-            throw new NotImplementedException();
+                                switch (frequency)
+                                {
+                                    case "Quarter":
+                                        emailCost /= 3;
+                                        break;
+                                    case "Bi-annual":
+                                        emailCost /= 6;
+                                        break;
+                                    case "Annual":
+                                        emailCost /= 12;
+                                        break;
+                                }
+                                model.Total += emailCost;
+                                var dto = new BreakdownDto();
+                                dto.Key = provider.EmailSystemName;
+                                dto.Value = emailCost;
+                                tempList.Add(dto);
+                            }
+                        }
+                    }
+                }
+            }
+            model.emailRevenueBreakdownIColection = tempList
+                                    .GroupBy(x => x.Key)
+                                    .Select(x => new BreakdownDto()
+                                    {
+                                        Key = x.FirstOrDefault().Key,
+                                        Value = x.Sum(s => s.Value),
+                                    })
+                                    .ToList();
+            return model;
         }
     }
 }

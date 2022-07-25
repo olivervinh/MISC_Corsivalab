@@ -19,45 +19,20 @@ namespace API.Controllers
         {
             return Ok(JsonConvert.SerializeObject(await _ataglancesService.CountProjectList()));
         }
-        [HttpGet("TotalForecast2020")]
-        public async Task<IActionResult> TotalForecast2020()
+        [HttpGet("TotalAndDomainRevenueBreakdownList")]
+        public async Task<IActionResult> TotalAndDomainRevenueBreakdownList()
         {
-            return Ok(await _ataglancesService.TotalForecast2020());
+            return Ok(JsonConvert.SerializeObject(await _ataglancesService.TotalAndDomainRevenueBreakdownList()));
         }
-        [HttpGet("TotalForecast2021")]
-        public async Task<IActionResult> TotalForecast2021()
-        {
-            return Ok(await _ataglancesService.TotalForecast2021());
-        }
-        [HttpGet("TotalForecast2022")]
-        public async Task<IActionResult> TotalForecast2022()
-        {
-            return Ok(await _ataglancesService.TotalForecast2022());
-        }
-        [HttpGet("TotalForecast2023")]
-        public async Task<IActionResult> TotalForecast2023()
-        {
-            return Ok(await _ataglancesService.TotalForecast2023());
-        }
-        [HttpGet("TotalConfirm2020")]
-        public async Task<IActionResult> TotalConfirm2020()
-        {
-            return Ok(await _ataglancesService.TotalConfirm2020());
-        }
-        [HttpGet("TotalConfirm2021")]
-        public async Task<IActionResult> TotalConfirm2021()
-        {
-            return Ok(await _ataglancesService.TotalConfirm2021());
-        }
-        [HttpGet("TotalConfirm2022")]
-        public async Task<IActionResult> TotalConfirm2022()
-        {
-            return Ok(await _ataglancesService.TotalConfirm2022());
-        }
-        [HttpGet("TotalConfirm2023")]
-        public async Task<IActionResult> TotalConfirm2023()
-        {
-            return Ok(await _ataglancesService.TotalConfirm2023());
-        }
+        //[HttpGet("TotalAndHostingRevenueBreakdownList")]
+        //public async Task<IActionResult> TotalAndHostingRevenueBreakdownList()
+        //{
+        //    return Ok(JsonConvert.SerializeObject(await _ataglancesService.TotalAndHostingRevenueBreakdownList()));
+        //}
+        //[HttpGet("TotalAndEmailRevenueBreakdownList")]
+        //public async Task<IActionResult> TotalAndEmailRevenueBreakdownList()
+        //{
+        //    return Ok(JsonConvert.SerializeObject(await _ataglancesService.TotalAndEmailRevenueBreakdownList()));
+        //}
     }
 }

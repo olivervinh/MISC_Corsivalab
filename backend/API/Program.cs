@@ -32,6 +32,9 @@ services.AddScoped<ITechnologyUsedService, TechnologyUsedService>();
 services.AddScoped<ITicketImageService, TicketImageService>();
 services.AddScoped<ITicketReplyService, TicketReplyService>();
 services.AddScoped<ITicketService, TicketService>();
+services.AddScoped<IProjectDomainService, ProjectDomainService>();
+services.AddScoped<IProjectEmailSystemService, ProjectEmailSystemService>();
+services.AddScoped<IProjectHostingService, ProjectHostingService>();
 services.AddScoped<IAtaglancesService, AtaglancesService>();
 # endregion
 services.AddCors();
