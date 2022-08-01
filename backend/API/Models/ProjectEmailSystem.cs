@@ -18,9 +18,9 @@ namespace API.Models
         [Column(name: "Cost", TypeName = "varchar(MAX)")]
         public string Cost { get; set; }
         [Column(name: "Remark", TypeName = "nvarchar(MAX)")]
-        public string Remark { get; set; }
+        public string? Remark { get; set; }
         [Column(name: "FkProjectDomainId", TypeName = "int")]
-        public int FkProjectDomainId { get; set; }
+        public int? FkProjectDomainId { get; set; }
         //public virtual Project Project { get; set; }
     }
 }

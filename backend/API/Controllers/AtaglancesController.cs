@@ -24,15 +24,15 @@ namespace API.Controllers
         {
             return Ok(JsonConvert.SerializeObject(await _ataglancesService.TotalAndDomainRevenueBreakdownList()));
         }
-        //[HttpGet("TotalAndHostingRevenueBreakdownList")]
-        //public async Task<IActionResult> TotalAndHostingRevenueBreakdownList()
-        //{
-        //    return Ok(JsonConvert.SerializeObject(await _ataglancesService.TotalAndHostingRevenueBreakdownList()));
-        //}
-        //[HttpGet("TotalAndEmailRevenueBreakdownList")]
-        //public async Task<IActionResult> TotalAndEmailRevenueBreakdownList()
-        //{
-        //    return Ok(JsonConvert.SerializeObject(await _ataglancesService.TotalAndEmailRevenueBreakdownList()));
-        //}
+        [HttpGet("TotalAndHostingRevenueBreakdownList")]
+        public async Task<IActionResult> TotalAndHostingRevenueBreakdownList()
+        {
+            return Ok(JsonConvert.SerializeObject(await _ataglancesService.TotalAndHostingRevenueBreakdownList()));
+        }
+        [HttpGet("TotalAndEmailRevenueBreakdownList")]
+        public async Task<IActionResult> TotalAndEmailRevenueBreakdownList()
+        {
+            return Ok(JsonConvert.SerializeObject(await _ataglancesService.TotalAndEmailRevenueBreakdownList()));
+        }
     }
 }

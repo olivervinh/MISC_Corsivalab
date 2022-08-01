@@ -62,6 +62,8 @@ namespace API.Services
             //get all project
             var projects = await _projectService.GetAll();
 
+            var domains = await _projectDomainService.GetAll();
+
             foreach (var project in projects)
             {
                 //Maintenance Cost
@@ -82,14 +84,13 @@ namespace API.Services
                             break;
                     }
                 }
-                var domains = await _projectDomainService.GetAll();
                 if (domains.Count() > 0)
                 {
                     foreach (var domain in domains)
                     {
-                        foreach (var provider in domainProviderList)
+                        foreach (var domainProvider in domainProviderList)
                         {
-                            if (domain.Provider == provider.Id)
+                            if (domain.Provider == domainProvider.Id)
                             {
                                 string frequency = domain.Cost.Split('/')[1];
                                 double domainCost = double.Parse(domain.Cost.Split('/')[0]);
@@ -108,7 +109,7 @@ namespace API.Services
                                 }
                                 model.Total += domainCost;
                                 var dto = new BreakdownDto();
-                                dto.Key = provider.Name;
+                                dto.Key = domainProvider.Name;
                                 dto.Value = domainCost;
                                 tempList.Add(dto);
                             }
@@ -127,7 +128,6 @@ namespace API.Services
                                     .ToList();
             return model;
         }
-
         public async Task<TotalAndEmailRevenueBreakdownDto> TotalAndEmailRevenueBreakdownList()
         {
             //set list temp
@@ -145,9 +145,11 @@ namespace API.Services
             //get all project
             var projects = await _projectService.GetAll();
 
-            //
-            var emailList = await _context.EmailSystems.ToListAsync();
+            //get email list
+            var emailSystemsList = await _context.EmailSystems.ToListAsync();
 
+            //get email system list
+            var emailSysProjectList = await _context.ProjectEmailSystems.ToListAsync();
             foreach (var project in projects)
             {
                 //Maintenance Cost
@@ -168,36 +170,32 @@ namespace API.Services
                             break;
                     }
                 }
-                var emailSysProjectList = await _context.ProjectEmailSystems.ToListAsync();
-                if (tempList.Count > 0)
+                foreach (var emailSysProject in emailSysProjectList)
                 {
-                    foreach (var email in emailSysProjectList)
+                    foreach (var emailSys in emailSystemsList)
                     {
-                        foreach (var provider in emailList)
+                        if (emailSysProject.Provider == emailSys.Id)
                         {
-                            if (email.Provider == provider.Id)
-                            {
-                                string frequency = email.Cost.Split('/')[1];
-                                double emailCost = double.Parse(email.Cost.Split('/')[0]);
+                            string frequency = emailSysProject.Cost.Split('/')[1];
+                            double emailCost = double.Parse(emailSysProject.Cost.Split('/')[0]);
 
-                                switch (frequency)
-                                {
-                                    case "Quarter":
-                                        emailCost /= 3;
-                                        break;
-                                    case "Bi-annual":
-                                        emailCost /= 6;
-                                        break;
-                                    case "Annual":
-                                        emailCost /= 12;
-                                        break;
-                                }
-                                model.Total += emailCost;
-                                var dto = new BreakdownDto();
-                                dto.Key = provider.EmailSystemName;
-                                dto.Value = emailCost;
-                                tempList.Add(dto);
+                            switch (frequency)
+                            {
+                                case "Quarter":
+                                    emailCost /= 3;
+                                    break;
+                                case "Bi-annual":
+                                    emailCost /= 6;
+                                    break;
+                                case "Annual":
+                                    emailCost /= 12;
+                                    break;
                             }
+                            model.Total += emailCost;
+                            var dto = new BreakdownDto();
+                            dto.Key = emailSys.EmailSystemName;
+                            dto.Value = emailCost;
+                            tempList.Add(dto);
                         }
                     }
                 }
@@ -212,27 +210,27 @@ namespace API.Services
                                     .ToList();
             return model;
         }
-
         public async Task<TotalAndHostingRevenueBreakdownDto> TotalAndHostingRevenueBreakdownList()
         {
             //set list temp
             var tempList = new List<BreakdownDto>();
 
             //new model
-            TotalAndEmailRevenueBreakdownDto model = new TotalAndEmailRevenueBreakdownDto();
+            TotalAndHostingRevenueBreakdownDto model = new TotalAndHostingRevenueBreakdownDto();
 
             //init Dicre
-            model.emailRevenueBreakdownIColection = new List<BreakdownDto>();
+            model.hostingRevenueBreakdownIColection = new List<BreakdownDto>();
 
-            //get all email provider list 
-            var projectEmailSystems = await _context.ProjectEmailSystems.ToListAsync();
 
             //get all project
             var projects = await _projectService.GetAll();
 
-            //
-            var emailList = await _context.EmailSystems.ToListAsync();
+            //get all
+            var hostingList = await _context.ProjectHostings.ToListAsync();
 
+            //get all doamin provider list 
+            var hostingProviderList = await _context.HostingProviders.ToListAsync();
+            
             foreach (var project in projects)
             {
                 //Maintenance Cost
@@ -253,41 +251,38 @@ namespace API.Services
                             break;
                     }
                 }
-                var emailSysProjectList = await _context.ProjectEmailSystems.ToListAsync();
-                if (tempList.Count > 0)
+               
+                foreach (var hosting in hostingList)
                 {
-                    foreach (var email in emailSysProjectList)
+                    foreach (var provider in hostingProviderList)
                     {
-                        foreach (var provider in emailList)
+                        if (hosting.Provider == provider.Id)
                         {
-                            if (email.Provider == provider.Id)
-                            {
-                                string frequency = email.Cost.Split('/')[1];
-                                double emailCost = double.Parse(email.Cost.Split('/')[0]);
+                            string frequency = hosting.Cost.Split('/')[1];
+                            double hotingCost = double.Parse(hosting.Cost.Split('/')[0]);
 
-                                switch (frequency)
-                                {
-                                    case "Quarter":
-                                        emailCost /= 3;
-                                        break;
-                                    case "Bi-annual":
-                                        emailCost /= 6;
-                                        break;
-                                    case "Annual":
-                                        emailCost /= 12;
-                                        break;
-                                }
-                                model.Total += emailCost;
-                                var dto = new BreakdownDto();
-                                dto.Key = provider.EmailSystemName;
-                                dto.Value = emailCost;
-                                tempList.Add(dto);
+                            switch (frequency)
+                            {
+                                case "Quarter":
+                                    hotingCost /= 3;
+                                    break;
+                                case "Bi-annual":
+                                    hotingCost /= 6;
+                                    break;
+                                case "Annual":
+                                    hotingCost /= 12;
+                                    break;
                             }
+                            model.Total += hotingCost;
+                            var dto = new BreakdownDto();
+                            dto.Key = provider.Name;
+                            dto.Value = hotingCost;
+                            tempList.Add(dto);
                         }
                     }
                 }
             }
-            model.emailRevenueBreakdownIColection = tempList
+            model.hostingRevenueBreakdownIColection = tempList
                                     .GroupBy(x => x.Key)
                                     .Select(x => new BreakdownDto()
                                     {

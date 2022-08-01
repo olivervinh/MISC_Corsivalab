@@ -17,3 +17,7 @@ export const ListProjectsNoPerson = async(user, dispatch) => {
         dispatch(loginFailed())
     }
 }
+async function getCountProjNotTaggedData(){
+    const res = await axiosClient.get('Dashboards/ListProjectCountMaintenance')
+    return res
+}
