@@ -1,17 +1,14 @@
 import { mapResponsive } from '@chakra-ui/utils'
 import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import axiosClient from 'services/api/axiosClient'
-export const ActMainProjAssigned = () => {
-    const [CountProjNotTaggedData,setCountProjNotTaggedData] = useState([])
-    useEffect(()=>{
-        async function getCountProjNotTaggedData(){
-            const res = await axiosClient.get('Dashboards/ListProjectCountMaintenance')
-            return res
-        }
-        getCountProjNotTaggedData()
-        .then((res)=>setCountProjNotTaggedData(res))
-        .catch((err)=>console.log(err))
-    },[])
+import { getActMainProjAssigned } from './apiRequest'
+export const Index = () => {
+  const value = useSelector((state)=>state.actMainProjAssigned.object.data)
+  const dispatch = useDispatch()
+  useEffect(()=>{
+    getActMainProjAssigned(dispatch)
+  },[])
   return (
     <div style={{backgroundColor:"white",borderRadius:20+"px"}}>
         <h3 className="m-portlet__head-text" style={{margin:20 +"px",padding:24+"px"}}>Active Maintenance Project Assigned</h3>
@@ -27,8 +24,7 @@ export const ActMainProjAssigned = () => {
                     </thead>
                         <tbody>
                         {
-                            
-                            CountProjNotTaggedData.map((item, key) => {
+                            value.map((item, key) => {
                                 return (
                                 <tr> 
                                     <th scope="row">{ key + 1}</th>
@@ -46,4 +42,4 @@ export const ActMainProjAssigned = () => {
   )
 }
 
-export default ActMainProjAssigned
+export default Index

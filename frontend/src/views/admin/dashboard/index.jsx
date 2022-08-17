@@ -11,10 +11,7 @@ function Index() {
     <div className="row">
         <div className="col-md-12">
             <div className="m-content">
-                <LinkGoogleDoc/>
                 <ActMainProjAssigned/>
-                <CountProjNotTagged/>
-                <Expiry120Days/>
             </div>
         </div>
     </div>

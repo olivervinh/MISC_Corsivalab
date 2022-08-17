@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './index.css'
 import Image from '../../../assets/login/images/corsivalab.png'
 import Tilt from 'react-tilt'
-import { loginUser } from "../../../services/api/userApiRequest";
+import { loginUser } from "./apiRequest.js";
 import { useDispatch } from "react-redux";
 import { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';

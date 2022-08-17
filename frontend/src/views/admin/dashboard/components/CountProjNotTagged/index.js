@@ -1,17 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import axiosClient from 'services/api/axiosClient'
-
-const CountProjNotTagged = () => {
-    const [countnottagged,Setcountnottagged]= useState(null)
+import { getCountProjNotTagged } from './apiRequest'
+const Index = () => {
+    const value = useSelector((state)=>state.countProjNotTaggedReducer.object.data)
+    const dispatch = useDispatch()
     useEffect(()=>{
-        async function getCountProjNotTaggedData(){
-            const res = axiosClient.get("Dashboards/ListProjectsNoPerson")
-            return res
-        }
-        getCountProjNotTaggedData()
-        .then(res=>Setcountnottagged(res))
-        .catch(err=>console.log(err))
-    })
+        getCountProjNotTagged(dispatch)
+    },[])
   return (
     <div style={{backgroundColor: "white",marginTop:"24px",borderRadius:"20px"}}>
         <h3 className="m-portlet__head-text" style={{margin:"20px",padding:"24px",display:'inline-block'}}>Count projects not tagged to any maintenance person </h3>
@@ -27,7 +22,7 @@ const CountProjNotTagged = () => {
                 <tbody>
                     <tr>
                         <th scope="row">1</th>
-                        <td>{countnottagged}</td>
+                        <td>{value}</td>
                         <td><a className="btn btn-primary editemailbtn" style={{color: "#ffffff"}}>  View projects</a></td>
                     </tr>
                 </tbody>
@@ -38,4 +33,4 @@ const CountProjNotTagged = () => {
   )
 }
 
-export default CountProjNotTagged
+export default Index

@@ -1,7 +1,9 @@
 //trước hết phải có thằng config store
 import { combineReducers, configureStore } from "@reduxjs/toolkit"
-import authReducer from "./authSlice" //import nó vào
+import authReducer from "../../views/auth/signIn/authSlice" //import nó vào
 import userReducer from "./userSlice"
+import actMainProjAssignedReducer from "../../views/admin/dashboard/components/ActMainProjAssigned/slice"
+import countProjNotTaggedReducer from "../../views/admin/dashboard/components/CountProjNotTagged/slice"
 import {
     persistStore,
     persistReducer,
@@ -21,6 +23,10 @@ const persistConfig = {
 const rootReducer = combineReducers({
     auth: authReducer,
     users: userReducer,
+    //dashboard
+    actMainProjAssigned:actMainProjAssignedReducer,
+    countProjNotTagged:countProjNotTaggedReducer
+    //dashboard
 })
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 export const store = configureStore({ //export cái store này ra
