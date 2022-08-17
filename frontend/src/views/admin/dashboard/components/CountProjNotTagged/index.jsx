@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import axiosClient from 'services/api/axiosClient'
+import { useDispatch, useSelector } from 'react-redux'
 import { getCountProjNotTagged } from './apiRequest'
 const Index = () => {
     const value = useSelector((state)=>state.countProjNotTaggedReducer.object.data)

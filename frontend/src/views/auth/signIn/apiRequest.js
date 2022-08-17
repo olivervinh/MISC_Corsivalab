@@ -1,8 +1,7 @@
 import axios from "axios"
 import { loginFailed, loginStart, loginSuccess, logOutStart, registerFailed, registerStart, registerSuccess } from "../../views/auth/signIn/authSlice"
-import { deleteUserFailed, deleteUsersSuccess, deleteUserStart, getUsersFailed, getUsersStart, getUsersSuccess } from "../redux/userSlice"
 import  { Redirect } from 'react-router-dom'
-import axiosClient from "./axiosClient"
+import axiosClient from "../../../services/api/axiosClient"
 //npm install axios
 export const loginUser = async(user, dispatch,navigate) => {
     dispatch(loginStart())
