@@ -1,6 +1,6 @@
 import {createSlice} from "@reduxjs/toolkit"
-const actMainProjAssignedSlice = createSlice({
-    name:"ActMainProjAssigned",
+const totalDomainRevenueBreakdownSlice = createSlice({
+    name:"TotalDomainRevenueBreakdown",
     initialState:{
         object:{
             data : null,
@@ -28,5 +28,5 @@ export const {
     start,
     success,
     failed
-} = actMainProjAssignedSlice.actions
-export default actMainProjAssignedSlice.reducer
+} = totalDomainRevenueBreakdownSlice.actions
+export default totalDomainRevenueBreakdownSlice.reducer

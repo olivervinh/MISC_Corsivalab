@@ -1,8 +1,8 @@
 import React from 'react'
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
-import TableHourly from './components/TableHourly';
-import TableMonthly from './components/TableMonthly';
+import TableHourly from './components/Hourly/index';
+import TableMonthly from './components/Monthly/index';
 const Index = () => {
     return (
         <div className="m-portlet__body" style={{marginTop:130+"px"}}>

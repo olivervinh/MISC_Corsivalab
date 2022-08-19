@@ -1,6 +1,6 @@
 import {createSlice} from "@reduxjs/toolkit"
-const tableMaintPeriodSlice = createSlice({
-    name:"TableMaintPeriod",
+const Maintenance_HourlySlice = createSlice({
+    name:"Maintenance_Hourly",
     initialState:{
         object:{
             data : null,
@@ -28,5 +28,5 @@ export const {
     start,
     success,
     failed
-} = tableMaintPeriodSlice.actions
-export default tableMaintPeriodSlice.reducer
+} = Maintenance_HourlySlice.actions
+export default Maintenance_HourlySlice.reducer

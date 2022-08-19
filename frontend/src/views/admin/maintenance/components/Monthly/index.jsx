@@ -1,17 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import axiosClient from 'services/api/axiosClient'
-
-const TableCustomer = () => {
-  const [customer, setCustomer] = useState([])
-  useEffect(()=>{
-    async function getCustomer(){
-      const res = axiosClient.get("Customers/GetAll")
-      return res
-    }
-    getCustomer()
-    .then(resolve=>setCustomer(resolve))
-    .catch(err=>console.log(err))
-  },[])
+import { useDispatch, useSelector } from 'react-redux'
+import {getMaintenance_Monthly} from './apiRequest'
+const Index = () => {
+    const value = useSelector((state)=>state.maintenance_Monthly.object.data)
+    const dispatch = useDispatch()
+    useEffect(()=>{
+        getMaintenance_Monthly(dispatch)
+    },[])
   return (
     <div style={{backgroundColor:"white",borderRadius:20+"px"}}>
     <h3 className="m-portlet__head-text" style={{margin:20 +"px",padding:24+"px"}}>Active Maintenance Project Assigned</h3>
@@ -20,19 +15,25 @@ const TableCustomer = () => {
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Company</th>
-                        <th scope="col">Industry</th>
+                        <th scope="col">Customer</th>
+                        <th scope="col">Project Title</th>
+                        <th scope="col">Project Type</th>
+                        <th scope="col">Expiry Date</th>
+                        <th scope="col">Report Last Uploaded</th>
                         <th scope="col">Actions</th>   
                     </tr>
                 </thead>
                     <tbody>
                     {
-                        customer.map((item, key) => {
+                        value.map((item, key) => {
                             return (
                             <tr> 
                                 <th scope="row">{ key + 1}</th>
-                                <td>{item.Company}</td>
-                                <td>{item.FkIndustryId}</td>
+                                <td>{item.CustomerName}</td>
+                                <td>{item.ProjectTitle}</td>
+                                <td>{item.ProjectNature}</td>
+                                <td>{item.ExpiryTime}</td>
+                                <td>Null</td>
                                 <td><a className="btn btn-primary editemailbtn" style={{color: 'white'}}>View Projects</a></td>
                             </tr>
                             );
@@ -45,4 +46,4 @@ const TableCustomer = () => {
   )
 }
 
-export default TableCustomer
+export default Index

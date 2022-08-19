@@ -1,5 +1,5 @@
 import axios from "axios"
-import { loginFailed, loginStart, loginSuccess, logOutStart, registerFailed, registerStart, registerSuccess } from "../../views/auth/signIn/authSlice"
+import { loginFailed, loginStart, loginSuccess } from "./authSlice.js"
 import  { Redirect } from 'react-router-dom'
 import axiosClient from "../../../services/api/axiosClient"
 //npm install axios

@@ -10,7 +10,7 @@ import {Provider} from "react-redux"
 import {store,persistor} from "./services/redux/store" //import cái store này vào
 import { PersistGate } from 'redux-persist/integration/react'
 import {Link} from "react-router-dom"
-import { fetch } from "views/admin/ataglance/slices/totalProjectsSlice";
+
 ReactDOM.render(
   <Provider store={store}>
     <ChakraProvider theme={theme}>

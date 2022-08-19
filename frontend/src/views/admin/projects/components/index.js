@@ -1,16 +1,12 @@
-import React, { useState } from 'react'
-import axiosClient from 'services/api/axiosClient';
-export const TableProject = () => {
-  const [project, setProject] = useState([])
-  React.useEffect(()=>{
-    async function getProject(){
-        var res =  await axiosClient.get("Projects/GetAll")
-        return res
-    }
-    getProject()
-    .then(resolve=>setProject(resolve))
-    .catch(err=>console.log(err))
-  },[])
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { getProjects } from './apiRequest';
+export const Index = () => {
+    const value = useSelector((state)=>state.projects.object.data)
+    const dispatch = useDispatch()
+    useEffect(()=>{
+        getProjects(dispatch)
+    },[])
   return (
     <div style={{backgroundColor:"white",borderRadius:20+"px"}}>
     <h3 className="m-portlet__head-text" style={{margin:20 +"px",padding:24+"px"}}>Active Maintenance Project Assigned</h3>
@@ -39,7 +35,7 @@ export const TableProject = () => {
                 </thead>
                     <tbody>
                     {
-                        project.map((item, key) => {
+                        value.map((item, key) => {
                             return (
                             <tr> 
                                 <th scope="row">{ key + 1}</th>
@@ -71,4 +67,4 @@ export const TableProject = () => {
   )
 }
 
-export default TableProject
+export default Index

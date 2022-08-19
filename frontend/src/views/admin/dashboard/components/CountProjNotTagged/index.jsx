@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getCountProjNotTagged } from './apiRequest'
 const Index = () => {
-    const value = useSelector((state)=>state.countProjNotTaggedReducer.object.data)
+    const value = useSelector((state)=>state.countProjNotTagged.object.data)
     const dispatch = useDispatch()
     useEffect(()=>{
         getCountProjNotTagged(dispatch)

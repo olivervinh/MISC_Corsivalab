@@ -1,36 +1,43 @@
 import React, { useEffect, useState } from 'react'
-import axiosClient from 'services/api/axiosClient'
 import { getExpiry120Days_maintenance } from './apiRequest'
+import moment from 'moment'
+import { useDispatch, useSelector } from 'react-redux';
+import Tab from 'react-bootstrap/Tab';
 const Index = () => {
-    const value = useSelector((state)=>state.countProjNotTaggedReducer.object.data)
+    const value = useSelector((state)=>state.expiry120Days_emailSystem.object.data)
     const dispatch = useDispatch()
     useEffect(()=>{
         getExpiry120Days_maintenance(dispatch)
     },[])
   return (
-    <div style={{backgroundColor: "white",marginTop:"24px",borderRadius:"20px"}}>
-        <h3 className="m-portlet__head-text" style={{margin:"20px",padding:"24px",display:'inline-block'}}>Count projects not tagged to any maintenance person </h3>
-        <div className="custom-table-responsive">
-            <table className="table" style={{margin:"20px"}}>
-                <thead>
-                    <tr>
-                        <th style={{width:"33.33%"}} scope="col">#</th>
-                        <th style={{width:"33.33%"}} scope="col">Count</th>
-                        <th style={{width:"33.33%"}} scope="col">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>{value}</td>
-                        <td><a className="btn btn-primary editemailbtn" style={{color: "#ffffff"}}>  View projects</a></td>
-                    </tr>
-                </tbody>
+                <table className="table" style={{margin:20+"px"}}>
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Title</th>
+                            <th scope="col">Customer</th>
+                            <th scope="col">Maintain by</th>
+                            <th scope="col">Expiry</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                        <tbody>
+                        {
+                            value.map((item, key) => {
+                                return (
+                                <tr> 
+                                    <th scope="row">{ key + 1}</th>
+                                    <td>{item.Title}</td>
+                                    <td>{item.CustomerName}</td>
+                                    <td>{item.MaintainBy}</td>
+                                    <td>{moment(item.ExpiryDashboardView).format('LL')}</td>
+                                    <td>Action</td>
+                                </tr>
+                                );
+                            })
+                        }
+                    </tbody>
                 </table>
-            </div>
-        <div style={{padding:"24px"}}></div>
-    </div>
   )
 }
-
 export default Index

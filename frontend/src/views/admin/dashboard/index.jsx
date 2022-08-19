@@ -3,7 +3,7 @@ import LinkGoogleDoc from './components/LinkGoogleDoc'
 import ActMainProjAssigned from './components/ActMainProjAssigned'
 import CountProjNotTagged from './components/CountProjNotTagged'
 import Expiry120Days from './components/Expiry120Days'
-
+import Tabs from 'react-bootstrap/Tabs';
 function Index() {
    
   return (
@@ -11,7 +11,10 @@ function Index() {
     <div className="row">
         <div className="col-md-12">
             <div className="m-content">
-                <ActMainProjAssigned/>
+              <LinkGoogleDoc/>
+              <ActMainProjAssigned/>
+              <CountProjNotTagged/>
+              <Expiry120Days/>
             </div>
         </div>
     </div>

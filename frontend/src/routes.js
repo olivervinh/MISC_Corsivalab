@@ -22,6 +22,7 @@ import Maintenance from "views/admin/maintenance";
 import Ataglance from "views/admin/ataglance";
 // Auth Imports
 import SignInCentered from "views/auth/signIn";
+import Demo from "views/admin/paginationAntd";
 
 const routes = [
   {
@@ -101,7 +102,7 @@ const routes = [
     path: "/sign-in",
     icon: <Icon as={MdLock} width='20px' height='20px' color='inherit' />,
     component: SignInCentered,
-  },
+  }
 ];
 
 export default routes;

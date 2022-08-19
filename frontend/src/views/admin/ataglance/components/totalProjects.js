@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import axiosClient from 'services/api/axiosClient'
-import { fetch } from '../slices/totalProjectsSlice'
+
 
 export const TotalProjects = () => {
   // const [totalProject,setTotalProject] = useState(null)

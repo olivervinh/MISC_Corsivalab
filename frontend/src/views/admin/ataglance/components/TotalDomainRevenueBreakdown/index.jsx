@@ -1,45 +1,41 @@
-import { mapResponsive } from '@chakra-ui/utils'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import axiosClient from 'services/api/axiosClient'
-import { getActMainProjAssigned } from './apiRequest'
-export const Index = () => {
-  const value = useSelector((state)=>state.actMainProjAssigned.object.data)
-  const dispatch = useDispatch()
-  useEffect(()=>{
-    getActMainProjAssigned(dispatch)
-  },[])
-  return (
-    <div style={{backgroundColor:"white",borderRadius:20+"px"}}>
-        <h3 className="m-portlet__head-text" style={{margin:20 +"px",padding:24+"px"}}>Active Maintenance Project Assigned</h3>
-            <div className="custom-table-responsive">
-                <table className="table" style={{margin:20+"px"}}>
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Maintain by</th>
-                            <th scope="col">Count</th>
-                            <th scope="col">Action</th>
-                        </tr>
-                    </thead>
-                        <tbody>
-                        {
-                            value.map((item, key) => {
-                                return (
-                                <tr> 
-                                    <th scope="row">{ key + 1}</th>
-                                    <td>{item.MaintainBy}</td>
-                                    <td>{item.Countproject}</td>
-                                    <td><a className="btn btn-primary editemailbtn" style={{color: 'white'}}>View Projects</a></td>
-                                </tr>
-                                );
-                            })
-                        }
-                    </tbody>
-                </table>
+import { getTotalDomainRevenueBreakdown } from './apiRequest'
+export const TotalDomainRevenueBreakdown = (data) => {
+    const value = useSelector((state)=>state.totalDomainRevenueBreakdown.object.data)
+    const dispatch = useDispatch()
+    useEffect(()=>{
+        getTotalDomainRevenueBreakdown(dispatch)
+    },[])
+    return (
+    <div>
+        <div className="m-portlet__head">
+                <div className="m-portlet__head-caption">
+                    <div className="m-portlet__head-title">
+                        <h3 className="m-portlet__head-text">Total Domain Revenue Per Month: {value.Total} $
+                        </h3>
+                    </div>
+                </div>
             </div>
-    </div>
-  )
+        <div className="m-portlet__body">
+                    <b>Revenue Breakdown</b>
+                    <table className="table">
+                        <tbody>
+                            {value.domainRevenueBreakdownIColection.map(item => {
+                                return (
+                                    <tr>
+                                        <td>{item.Key}</td>
+                                        <td>{item.Value}</td>
+                                    </tr>
+                                )
+                            })}
+
+                        </tbody>
+                    </table>
+                </div>
+        </div>
+    )
 }
 
-export default Index
+export default TotalDomainRevenueBreakdown

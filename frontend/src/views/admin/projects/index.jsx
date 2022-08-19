@@ -1,5 +1,5 @@
 import React from 'react'
-import TableProject from './components/TableProject'
+import TableProject from './components'
 const Index = () => {
   return (
 <div className="m-portlet__body"style={{marginTop:130+"px"}}>
