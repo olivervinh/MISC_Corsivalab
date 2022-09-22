@@ -3,7 +3,7 @@ const Maintenance_MonthlySlice = createSlice({
     name:"Maintenance_Monthly",
     initialState:{
         object:{
-            data : null,
+            data : [],
             isFetching :false,
             error:false 
         },

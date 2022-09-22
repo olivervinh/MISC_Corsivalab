@@ -1,13 +1,17 @@
 import { mapResponsive } from '@chakra-ui/utils'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import axiosClient from 'services/api/axiosClient'
 import { getActMainProjAssigned } from './apiRequest'
+import { Link} from "react-router-dom";
+import Loading from '../../../../../components/loading/index'
 export const Index = () => {
+  const[loading,setLoading] = useState(false)
   const value = useSelector((state)=>state.actMainProjAssigned.object.data)
   const dispatch = useDispatch()
   useEffect(()=>{
     getActMainProjAssigned(dispatch)
+    if(value!=null)
+        setLoading(true)
   },[])
   return (
     <div style={{backgroundColor:"white",borderRadius:20+"px"}}>
@@ -24,16 +28,18 @@ export const Index = () => {
                     </thead>
                         <tbody>
                         {
+                            loading?
                             value.map((item, key) => {
                                 return (
                                 <tr> 
                                     <th scope="row">{ key + 1}</th>
                                     <td>{item.MaintainBy}</td>
                                     <td>{item.Countproject}</td>
-                                    <td><a className="btn btn-primary editemailbtn" style={{color: 'white'}}>View Projects</a></td>
+                                    <td><Link className="btn btn-primary editemailbtn" to={`/admin/MaintenanceProjectAssigned/?MaintainBy=${item.MaintainBy}`} style={{color: 'white'}}>View Projects</Link></td>
                                 </tr>
                                 );
-                            })
+                            }):
+                            <Loading/>
                         }
                     </tbody>
                 </table>
@@ -41,5 +47,4 @@ export const Index = () => {
     </div>
   )
 }
-
 export default Index

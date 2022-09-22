@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getCustomers } from './apiRequest'
+import Loading from '../../../../components/loading/index'
 const Index = () => {
+const[loading,setLoading] = useState(false)
 const value = useSelector((state)=>state.customers.object.data)
 const dispatch = useDispatch()
 useEffect(()=>{
     getCustomers(dispatch)
+    if(value!=null)
+        setLoading(true)
 },[])
   return (
     <div style={{backgroundColor:"white",borderRadius:20+"px"}}>
@@ -22,6 +26,7 @@ useEffect(()=>{
                 </thead>
                     <tbody>
                     {
+                        loading?
                         value.map((item, key) => {
                             return (
                             <tr> 
@@ -32,7 +37,7 @@ useEffect(()=>{
                             </tr>
                             );
                         })
-                    }
+                        :<Loading/>}
                 </tbody>
             </table>
         </div>

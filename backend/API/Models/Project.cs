@@ -57,6 +57,8 @@ namespace API.Models
         public int? FkDomainProviderId { get; set; }
         [Column("CreatedAtDatetime", TypeName = "datetime2(7)")]
         public DateTime? CreatedAtDatetime { get; set; }
+        [Column("MaintenanceShortLink", TypeName= "varchar(MAX)")]
+        public string? MaintenanceShortLink { get; set; }
         [NotMapped]
         public Customer Customer { get; set; }
         [NotMapped]

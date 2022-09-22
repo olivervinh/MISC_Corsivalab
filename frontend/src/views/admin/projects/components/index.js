@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { getProjects } from './apiRequest';
+import Loading from '../../../../components/loading/index'
 export const Index = () => {
+    const [loading,setLoading] = useState(false)
     const value = useSelector((state)=>state.projects.object.data)
     const dispatch = useDispatch()
     useEffect(()=>{
         getProjects(dispatch)
+        if(value!=null)
+            setLoading(true)
     },[])
   return (
     <div style={{backgroundColor:"white",borderRadius:20+"px"}}>
@@ -34,31 +38,31 @@ export const Index = () => {
                     </tr>
                 </thead>
                     <tbody>
-                    {
-                        value.map((item, key) => {
+                    {loading ?  value.map((item, key) => {
                             return (
-                            <tr> 
-                                <th scope="row">{ key + 1}</th>
-                                <td>{item.Title}</td>
-                                <td>{item.Domain}</td>
-                                <td>{item.MaintExpire}</td>
-                                <td>{item.ForecastStart}</td>
-                                <td>{item.Forecast}</td>
-                                <td>{item.MaintStart}</td>
-                                <td>{item.ForecastAmount}</td>
-                                <td>{item.EmailSystemExpire}</td>
-                                <td>{item.FkCustomerId}</td>
-                                <td>{item.MaintainBy}</td>
-                                <td>{item.FkEmailSystemId}</td>
-                                <td>{item.AMEmail}</td>
-                                <td>{item.Phase}</td>
-                                <td>{item.ProjectNature}</td>
-                                <td>{item.Backup}</td>
-                                <td>{item.Credential}</td>
-                                <td><a className="btn btn-primary editemailbtn" style={{color: 'white'}}>View Projects</a></td>
-                            </tr>
+                                <tr> 
+                                    <th scope="row">{ key + 1}</th>
+                                    <td>{item.Title}</td>
+                                    <td>{item.Domain}</td>
+                                    <td>{item.MaintExpire}</td>
+                                    <td>{item.ForecastStart}</td>
+                                    <td>{item.Forecast}</td>
+                                    <td>{item.MaintStart}</td>
+                                    <td>{item.ForecastAmount}</td>
+                                    <td>{item.EmailSystemExpire}</td>
+                                    <td>{item.FkCustomerId}</td>
+                                    <td>{item.MaintainBy}</td>
+                                    <td>{item.FkEmailSystemId}</td>
+                                    <td>{item.AMEmail}</td>
+                                    <td>{item.Phase}</td>
+                                    <td>{item.ProjectNature}</td>
+                                    <td>{item.Backup}</td>
+                                    <td>{item.Credential}</td>
+                                    <td><a className="btn btn-primary editemailbtn" style={{color: 'white'}}>View Projects</a></td>
+                                </tr>
                             );
-                        })
+                        }):<Loading/>}
+                        {  
                     }
                 </tbody>
             </table>

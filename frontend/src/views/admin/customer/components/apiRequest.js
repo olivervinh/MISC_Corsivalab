@@ -5,6 +5,7 @@ export const getCustomers = async(dispatch) =>{
     dispatch(start())
     try{
         const res = await axiosClient.get("Customers/GetAll")
+        console.log("data customer", res)
         dispatch(success(res))
     }catch(err){
         dispatch(failed(err))

@@ -24,6 +24,14 @@ import Ataglance from "views/admin/ataglance";
 import SignInCentered from "views/auth/signIn";
 import Demo from "views/admin/paginationAntd";
 
+//update project
+import UpdateProject from "views/admin/update-project"
+//update project
+
+//child
+ //dashboard
+  //ActMainProjAssigned
+   import MaintenanceProjectAssigned from "views/admin/dashboard/components/ActMainProjAssigned/MaintenanceProjectAssigned"
 const routes = [
   {
     name: "Dashboard",
@@ -102,7 +110,16 @@ const routes = [
     path: "/sign-in",
     icon: <Icon as={MdLock} width='20px' height='20px' color='inherit' />,
     component: SignInCentered,
+  },
+  {
+    layout:"/admin",
+    path:"/MaintenanceProjectAssigned",
+    component:MaintenanceProjectAssigned,
+  },
+  {
+    layout:"/admin",
+    path:"/update-project",
+    component:UpdateProject
   }
 ];
-
 export default routes;

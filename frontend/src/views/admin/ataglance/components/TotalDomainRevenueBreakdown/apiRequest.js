@@ -1,4 +1,3 @@
-import axios from "axios"
 import axiosClient from "services/api/axiosClient.js"
 import {start,success,failed} from './slice.js'
 export const getTotalDomainRevenueBreakdown = async(dispatch) =>{

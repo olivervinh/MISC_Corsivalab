@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {getMaintenance_Hourly} from './apiRequest'
+import Loading from '../../../../../components/loading/index'
 const Index = () => {
+    const[loading,setLoading] = useState(false)
     const value = useSelector((state)=>state.maintenance_Hourly.object.data)
     const dispatch = useDispatch()
     useEffect(()=>{
         getMaintenance_Hourly(dispatch)
+        if(value!=null)
+        setLoading(true)
     },[])
   return (
     <div style={{backgroundColor:"white",borderRadius:20+"px"}}>
@@ -24,7 +28,7 @@ const Index = () => {
                     </tr>
                 </thead>
                     <tbody>
-                    {
+                    {loading?
                         value.map((item, key) => {
                             return (
                             <tr> 
@@ -37,7 +41,8 @@ const Index = () => {
                                 <td><a className="btn btn-primary editemailbtn" style={{color: 'white'}}>View Projects</a></td>
                             </tr>
                             );
-                        })
+                        }):
+                        <Loading/>
                     }
                 </tbody>
             </table>

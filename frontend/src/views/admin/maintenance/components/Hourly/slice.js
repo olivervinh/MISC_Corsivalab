@@ -3,7 +3,7 @@ const Maintenance_HourlySlice = createSlice({
     name:"Maintenance_Hourly",
     initialState:{
         object:{
-            data : null,
+            data : [],
             isFetching :false,
             error:false 
         },

@@ -3,11 +3,15 @@ import { getExpiry120Days_hosting } from './apiRequest'
 import moment from 'moment'
 import { useDispatch, useSelector } from 'react-redux';
 import Tab from 'react-bootstrap/Tab';
+import Loading from '../../../../../components/loading/index'
 const Index = () => {
+    const[loading,setLoading] = useState(false)
     const value = useSelector((state)=>state.expiry120Days_hosting.object.data)
     const dispatch = useDispatch()
     useEffect(()=>{
         getExpiry120Days_hosting(dispatch)
+        if(value!=null)
+        setLoading(true)
     },[])
   return (
                 <table className="table" style={{margin:20+"px"}}>
@@ -23,6 +27,7 @@ const Index = () => {
                     </thead>
                         <tbody>
                         {
+                            loading?
                             value.map((item, key) => {
                                 return (
                                 <tr> 
@@ -34,8 +39,7 @@ const Index = () => {
                                     <td>Action</td>
                                 </tr>
                                 );
-                            })
-                        }
+                            }):<Loading/>}
                     </tbody>
                 </table>
 

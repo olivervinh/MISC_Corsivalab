@@ -18,5 +18,6 @@ namespace API.Models
         [Column(name: "FkProjectId", TypeName = "int")]
         public int FkProjectId { get; set; }
         //public virtual Project Project { get; set; }
+        public string Remark { get; set; }
     }
 }

@@ -5,6 +5,7 @@ export const getMaintenance_Hourly = async(dispatch) =>{
     dispatch(start())
     try{
         const res = await axiosClient.get("Maintenances/GetMaintenanceHourly")
+        console.log('data value hourly',res)
         dispatch(success(res))
     }catch(err){
         dispatch(failed(err))
